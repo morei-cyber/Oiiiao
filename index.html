@@ -273,6 +273,119 @@ body.builder-world-open .builder-selected-info>b,body.builder-world-open .builde
 @media(max-width:600px){.builder-tutorial{top:112px;right:7px;width:min(285px,calc(100vw - 18px));min-width:0;padding:9px 10px}.builder-tutorial h3{font-size:13px;margin:7px 0 4px}.builder-tutorial p{font-size:9px;min-height:0}.builder-tutorial-progress{margin:8px 0 6px}.builder-tutorial-kicker{font-size:8px}.builder-tutorial-kicker b{font-size:7px}}
 </style>
 
+
+<style id="legoWorkshopOverhaul">
+:root{--lego-ink:#18384b;--lego-line:#b6d0df;--lego-panel:rgba(249,253,255,.96);--lego-teal:#1b8994;--lego-yellow:#ffd35d}
+#builderWorldOverlay{background:#8fc9ef}
+#builderWorldCanvas{touch-action:none;cursor:crosshair}
+.builder-world-top{left:14px;right:14px;top:12px;gap:10px}
+.builder-world-brand,.builder-world-actions{box-shadow:0 9px 28px #18384b2b}
+.builder-world-brand{min-width:220px;padding:11px 15px}
+.builder-world-brand strong{font-size:12px;letter-spacing:.1em}
+.builder-world-brand small{font-size:10px}
+.builder-world-actions{gap:7px;padding:7px;flex-wrap:wrap;justify-content:flex-end}
+.builder-world-actions button{min-height:44px;padding:10px 13px;font-size:12px;border-radius:10px}
+.builder-world-actions button.prototype-launch-btn{background:linear-gradient(135deg,#fff1bd,#ffe090);border-color:#e6b94d;color:#644a12}
+.builder-world-hud{top:76px;left:50%;gap:8px;padding:7px 10px;font-size:10px;box-shadow:0 4px 18px #23435b18;white-space:nowrap}
+.builder-world-location{top:auto;bottom:104px;left:50%;transform:translateX(-50%);font-size:11px;padding:7px 12px;border-radius:999px;background:#f7fcffe8;border:1px solid #b7d0df;color:#34596d;z-index:2}
+#builderPanel{top:84px!important;left:12px!important;right:auto!important;bottom:12px!important;width:min(390px,calc(100vw - 24px))!important;z-index:46}
+#builderPanel .builder-shell{background:var(--lego-panel)!important;border:1px solid var(--lego-line)!important;border-radius:18px!important;color:var(--lego-ink)!important;box-shadow:0 14px 42px #173d5540!important;backdrop-filter:blur(14px)}
+.builder-head{padding:12px 14px;background:linear-gradient(125deg,#e6f4fc,#fff)!important;border-color:#cbdde8!important}
+.builder-head .eyebrow{color:#218c91;font-size:9px}
+.builder-head h2{font-size:16px;color:#18384b!important}
+.builder-head small{font-size:10px;color:#607f91!important}
+.builder-head button{min-height:42px;padding:9px 12px;background:#eef5f9!important;border:1px solid #bfd4df!important;color:#24475a!important;border-radius:10px!important;font-size:12px!important}
+.builder-status-grid{gap:6px;padding:8px 10px;border-color:#d4e2e9}
+.builder-status-grid>div{background:#f0f7fa!important;border:1px solid #d2e2e9!important;border-radius:10px!important;padding:7px}
+.builder-status-grid small{font-size:9px;color:#688395!important}
+.builder-status-grid b{font-size:14px;color:#157d83!important}
+.builder-main{display:flex!important;flex-direction:column!important;gap:9px!important;padding:9px!important;overflow:auto!important}
+.builder-catalog{flex:1 1 auto;min-height:245px;gap:7px}
+.builder-tools{flex:0 0 auto;gap:7px;min-height:0}
+.builder-filter{display:grid;grid-template-columns:1fr!important;gap:6px}
+.builder-filter input{width:100%;min-height:45px!important;background:#fff!important;color:#24465a!important;border:1px solid #bfd4df!important;border-radius:11px!important;padding:11px 13px!important;font-size:13px!important;outline:none}
+.builder-filter select{display:none!important}
+.builder-category-chips{display:flex;gap:6px;overflow-x:auto;padding:1px 1px 5px;scrollbar-width:thin;flex:0 0 auto}
+.builder-category-chip{flex:0 0 auto;min-height:40px;padding:8px 11px;border:1px solid #c3d8e3;border-radius:999px;background:#f3f8fb;color:#31566b;font-weight:800;font-size:11px;white-space:nowrap;cursor:pointer}
+.builder-category-chip.active{background:#dff7f3;border-color:#5bb7aa;color:#126f70;box-shadow:inset 0 0 0 1px #6ec6b94a}
+.builder-library-tabs{display:flex;gap:5px;flex:0 0 auto}
+.builder-library-tabs button{flex:1;min-height:39px;padding:7px 6px;border:1px solid #cadde6;border-radius:9px;background:#f3f7fa;color:#587587;font-size:11px;font-weight:800}
+.builder-library-tabs button.active{background:#fff0c7;border-color:#e5bd54;color:#795917}
+.builder-catalog-count{font-size:10px;color:#507689!important;letter-spacing:.05em}
+.builder-asset-list{display:grid;grid-template-columns:1fr 1fr;gap:7px;overflow:auto;min-height:115px;max-height:252px;padding:1px 3px 2px 0;flex:1 1 165px}
+.builder-asset-card{position:relative;display:grid;grid-template-columns:34px minmax(0,1fr) 24px;grid-template-rows:auto auto;align-items:center;column-gap:7px;min-height:64px;padding:8px 7px;background:#fff;border:1px solid #d2e1e8;border-radius:12px;color:#24475a;cursor:pointer;text-align:left;box-shadow:0 2px 5px #20465b0a}
+.builder-asset-card:hover{border-color:#8abcc4;background:#f8fffe}
+.builder-asset-card.active{border:2px solid #36a69a;background:#e9fbf7;box-shadow:0 0 0 2px #36a69a20}
+.builder-asset-swatch{grid-column:1;grid-row:1/3;width:32px;height:32px;border-radius:10px;background:var(--swatch);border:2px solid #fff;box-shadow:0 0 0 1px #a8bbc4, inset 0 1px #ffffff88}
+.builder-asset-title{grid-column:2;grid-row:1;font-size:11px;font-weight:900;line-height:1.25;overflow-wrap:anywhere;color:#24475a}
+.builder-asset-meta{grid-column:2;grid-row:2;font-size:9px;color:#688394;line-height:1.2;margin-top:3px}
+.builder-fav{grid-column:3;grid-row:1/3;align-self:center;width:28px;height:32px;min-height:32px!important;padding:0!important;border:0!important;border-radius:8px!important;background:#f1f6f8!important;color:#9ab0bc!important;font-size:16px!important}
+.builder-fav.on{color:#d99b1b!important;background:#fff4d4!important}
+.builder-empty{grid-column:1/-1;padding:16px;text-align:center;border:1px dashed #b8ccd6;border-radius:12px;color:#648194;font-size:12px}
+.builder-catalog-detail{background:#eff6f9!important;border:1px solid #d0e1e9!important;border-radius:12px!important;padding:10px!important;color:#24475a!important;flex:0 0 auto;max-height:160px;overflow:auto}
+.builder-catalog-detail b{font-size:12px;color:#1e5364}
+.builder-catalog-detail p{font-size:10px;line-height:1.45;color:#5c798b}
+.builder-detail-grid{font-size:10px;color:#5c798b}
+#builderPlaceBtn{width:100%;min-height:48px!important;padding:12px!important;border-radius:12px!important;background:linear-gradient(135deg,#1c9c91,#167780)!important;border:1px solid #167b78!important;color:#fff!important;font-size:13px!important;font-weight:900!important;box-shadow:0 5px 12px #178b8528}
+.builder-toolbar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.builder-toolbar button,.builder-tools button{min-height:44px!important;padding:9px 10px!important;border-radius:10px!important;background:#eef5f8!important;border:1px solid #c0d5df!important;color:#28536a!important;font-size:11px!important;font-weight:850!important}
+.builder-toolbar button.active{background:#e1f5ec!important;border-color:#7abda0!important;color:#1d7256!important}
+.builder-toolbar #builderCancelMode{background:#fff0eb!important;border-color:#e3b8a9!important;color:#874b3d!important}
+.builder-mode-status,.builder-selected-info,.builder-power-state,.builder-pilot-box,.builder-notes{background:#f0f6f9!important;border:1px solid #d0e0e8!important;border-radius:11px!important;color:#31566a!important;padding:9px!important}
+.builder-mode-status,.builder-selected-info small,.builder-power-state span,.builder-pilot-box span,.builder-notes p{font-size:10px!important;line-height:1.45;color:#607f91!important}
+.builder-selected-info b,.builder-power-state b,.builder-pilot-box b,.builder-notes b{color:#1e6872!important;font-size:11px}
+.builder-edit-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin-top:8px}
+.builder-edit-actions button{min-height:42px!important;padding:8px 5px!important;border-radius:9px!important;background:#fff!important;border:1px solid #cadde6!important;color:#31566a!important;font-size:10px!important;font-weight:800!important}
+.builder-edit-actions button.danger{background:#fff1ed!important;border-color:#ecc0b4!important;color:#9a4d3c!important}
+.builder-creative{font-size:11px;color:#42657a!important}
+.builder-panel button:disabled{opacity:.42!important}
+.builder-quickbar{position:absolute;z-index:7;left:50%;bottom:17px;transform:translateX(-50%);display:flex;gap:7px;padding:7px;background:#f7fcfff0;border:1px solid #b8d0dc;border-radius:15px;box-shadow:0 8px 26px #173c5333;backdrop-filter:blur(10px)}
+.builder-quick-slot{position:relative;width:58px;height:58px;min-height:58px;padding:5px;border:2px solid #c5d7e0;border-radius:12px;background:#fff;color:#31566a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:9px;font-weight:850;cursor:pointer}
+.builder-quick-slot.active{border-color:#e3ad37;background:#fff5d7;box-shadow:0 0 0 2px #e7bb5433}
+.builder-quick-icon{width:25px;height:25px;border-radius:7px;border:1px solid #8ea4b0}
+.builder-quick-slot small{font-size:8px;color:#6b8796}
+.builder-quickbar-hint{position:absolute;z-index:7;bottom:85px;left:50%;transform:translateX(-50%);padding:5px 9px;border-radius:999px;background:#f7fcffdc;color:#456779;font-size:9px;white-space:nowrap;pointer-events:none}
+.builder-touch-pad{display:none;position:absolute;z-index:8;left:18px;bottom:24px;width:122px;height:142px;touch-action:none;user-select:none;align-items:center;justify-content:flex-end;flex-direction:column;gap:5px;color:#24495d;font-size:10px;font-weight:900}
+.builder-touch-ring{position:relative;width:112px;height:112px;border-radius:50%;background:#f5fbff9c;border:2px solid #c4d9e4;box-shadow:0 5px 18px #173d5530;touch-action:none}
+.builder-touch-knob{position:absolute;left:50%;top:50%;width:46px;height:46px;border-radius:50%;transform:translate(-50%,-50%);background:linear-gradient(145deg,#fff,#d5e9f3);border:2px solid #8eb4c6;box-shadow:0 3px 9px #244d6138}
+.builder-touch-sprint{display:none;position:absolute;z-index:8;right:22px;bottom:48px;min-width:72px;min-height:64px;border-radius:50%!important;background:#fff2c8!important;border:2px solid #e4bb54!important;color:#745718!important;font-weight:900!important;box-shadow:0 5px 16px #41351b2c}
+#builderWorldOverlay.walking #builderTouchPad,#builderWorldOverlay.walking #builderTouchSprint{display:flex}
+#builderWorldOverlay.walking .builder-world-location{display:none}
+#builderWorldOverlay.walking .builder-world-hud{display:none}
+#builderWorldOverlay.walking .builder-quickbar-hint{display:none}
+#builderWorldOverlay.walking #builderQuickbar{bottom:13px;left:50%;}
+body.builder-walking #builderPanel{display:none!important}
+#builderWorldOverlay.walking #builderWorldCrosshair{display:none!important}
+#builderBagToggle{background:#e8f7f2!important;border-color:#9ccfbe!important;color:#226b59!important}
+#builderPanel .builder-main{overscroll-behavior:contain}
+@media(max-width:900px){.builder-world-hud{display:none}.builder-world-brand{min-width:0}.builder-world-actions button{min-height:46px}.builder-world-brand small{display:none}}
+@media(max-width:620px){
+ .builder-world-top{top:6px;left:6px;right:6px;align-items:flex-start}
+ .builder-world-brand{padding:9px 10px;max-width:150px}.builder-world-brand strong{font-size:9px}.builder-world-actions{max-width:calc(100vw - 165px);gap:4px;padding:4px}
+ .builder-world-actions button{min-height:42px;padding:8px 9px;font-size:10px}
+ #prototypeCenterBtn{display:none}
+ #builderPanel{top:auto!important;bottom:6px!important;left:6px!important;right:6px!important;width:auto!important;height:min(68vh,650px)!important;max-height:calc(100vh - 90px)}
+ #builderPanel .builder-shell{border-radius:15px!important}
+ .builder-head{padding:8px 10px}.builder-head h2{font-size:14px}.builder-head small{font-size:9px}
+ .builder-status-grid{grid-template-columns:repeat(4,1fr);padding:6px;gap:4px}.builder-status-grid small{font-size:8px}.builder-status-grid b{font-size:11px}
+ .builder-main{padding:7px!important;gap:6px!important}
+ .builder-catalog{min-height:190px}
+ .builder-asset-list{max-height:170px;grid-template-columns:1fr 1fr;gap:5px}
+ .builder-asset-card{min-height:58px;padding:6px;grid-template-columns:27px minmax(0,1fr) 20px;column-gap:5px}
+ .builder-asset-swatch{width:25px;height:25px}.builder-asset-title{font-size:10px}.builder-asset-meta{font-size:8px}
+ .builder-category-chip{min-height:38px;font-size:10px;padding:7px 9px}
+ .builder-library-tabs button{min-height:38px;font-size:10px}
+ .builder-quickbar{bottom:12px;gap:4px;padding:5px;border-radius:12px;max-width:calc(100vw - 20px)}
+ .builder-quick-slot{width:47px;height:49px;min-height:49px;border-radius:9px;font-size:8px}
+ .builder-quick-icon{width:21px;height:21px}
+ #builderWorldOverlay.walking .builder-quickbar{bottom:12px;left:50%;transform:translateX(-50%)}
+ .builder-touch-pad{left:10px;bottom:84px;transform:scale(.92);transform-origin:bottom left}
+ .builder-touch-sprint{right:12px;bottom:93px;min-width:60px;min-height:60px}
+ .builder-world-location{display:none}
+}
+@media(max-width:390px){.builder-status-grid{grid-template-columns:repeat(2,1fr)}.builder-quick-slot{width:43px}.builder-world-actions button{min-height:39px;padding:7px}.builder-world-brand{max-width:128px}}
+</style>
+
 </head><body>
 
 <style>
@@ -337,43 +450,50 @@ body button{min-height:42px;padding:10px 13px;touch-action:manipulation}
 <div id="builderWorldOverlay" aria-label="金属製ロケット発射台・独立3D建築空間">
  <canvas id="builderWorldCanvas" aria-label="金属製ロケット発射台3Dワールド"></canvas>
  <div class="builder-world-top">
-  <div class="builder-world-brand"><strong>METAL LAUNCH DECK / ENGINEERING PAD</strong><small>晴天の金属製発射台 · 3D BUILD & TEST FIELD</small></div>
+  <div class="builder-world-brand"><strong>OPEN WORKSHOP ISLAND / NEURAL//FABRIC</strong><small>三人称サンドボックス · BUILD / EXPLORE / CONNECT</small></div>
   <div class="builder-world-actions">
    <button id="prototypeCenterBtn" class="prototype-launch-btn">🏗 試作設計センター</button>
-   <button id="builderWalkToggle">🚶 徒歩モード</button>
+   <button id="builderBagToggle">🎒 持ち物</button>
+   <button id="builderWalkToggle">🚶 三人称モード</button>
    <button id="builderWorldGuide">📘 建築ガイド</button>
    <button id="builderWorldSave">保存</button>
    <button id="builderWorldExit" class="exit">研究所を出る ✕</button>
   </div>
  </div>
- <div class="builder-world-hud"><span>晴天 / DAYLIGHT</span><span>強化鋼板プラットフォーム</span><span>編集：左クリックで選択・配置</span><span>視点：右ドラッグで回転 · ホイールでズーム</span><span id="builderWorldMode">EDIT MODE</span></div>
+ <div class="builder-world-hud"><span>WORKSHOP ISLAND · DAYLIGHT</span><span>左クリック：選択／設置</span><span>右ドラッグ：視点回転</span><span>ホイール：ズーム</span><span id="builderWorldMode">BUILD MODE</span></div>
  <div class="builder-world-location" id="builderWorldLocation">MAIN STEEL LAUNCH DECK · 金属製発射台</div>
   <section id="builderTutorial" class="builder-tutorial" aria-live="polite" aria-label="必須操作チュートリアル">
    <div class="builder-tutorial-kicker"><span id="builderTutorialStep">STEP 01 / 08</span><b>必須トレーニング · TRAINING LOCK</b></div>
    <h3 id="builderTutorialTitle">資材を選択する</h3>
-   <p id="builderTutorialText">左側の部品カタログから「構造用鋼 床プレート」をクリックしてください。</p>
+   <p id="builderTutorialText">左側のアイテム一覧から「構造用鋼 床プレート」を選んでください。</p>
    <div class="builder-tutorial-progress"><span id="builderTutorialProgress" style="width:0%"></span></div>
    <div class="builder-tutorial-foot"><span id="builderTutorialStatus">操作を待っています</span><strong id="builderTutorialCount">0 / 8</strong></div>
    <div id="builderTutorialDonePanel" class="builder-tutorial-done" hidden>訓練完了。自由建築が解放されました。<button id="builderTutorialReplay" type="button">操作訓練をもう一度</button></div>
   </section>
 
  <div class="builder-world-crosshair" id="builderWorldCrosshair">＋</div>
+ <div id="builderQuickbar" class="builder-quickbar" aria-label="クイック建築スロット"></div>
+ <div id="builderQuickbarHint" class="builder-quickbar-hint">1〜6：部品を選択 · 建築モードで配置</div>
+ <div id="builderTouchPad" class="builder-touch-pad" aria-label="移動パッド"><div class="builder-touch-ring"><div id="builderTouchKnob" class="builder-touch-knob"></div></div><span>移動</span></div>
+ <button id="builderTouchSprint" class="builder-touch-sprint">走る</button>
 </div>
 <div id="builderPanel" class="builder-panel" aria-label="自由建築モード">
  <div class="builder-shell">
-  <header class="builder-head"><div><div class="eyebrow">MODULAR CONSTRUCTION · 500 ASSETS</div><h2>ロケット発射台 · 自由建築ワークショップ</h2><small>独立3D空間 · 金属鋼板デッキ · 配置・配線・操縦</small></div><button id="builderClose" type="button">閉じる ✕</button></header>
+  <header class="builder-head"><div><div class="eyebrow">MODULAR CONSTRUCTION · 500 ASSETS</div><h2>オープン建築ワークショップ</h2><small>歩き回る · パーツ配置 · 接合 · 保存</small></div><button id="builderClose" type="button">閉じる ✕</button></header>
   <div class="builder-status-grid">
    <div><small>配置部品</small><b id="builderCount">0</b></div><div><small>接続部品の需要</small><b id="builderPowerNeed">0.00 kW</b></div><div><small>実際の消費</small><b id="builderPowerUsed">0.00 kW</b></div><div><small>接続線</small><b id="builderLinkCount">0</b></div>
   </div>
   <div class="builder-main">
    <section class="builder-catalog">
-    <div class="builder-filter"><select id="builderCategory"></select><input id="builderSearch" type="search" placeholder="部品名・素材で検索"></div>
-    <div id="builderCatalogCount" class="builder-catalog-count">500 / 500 ASSETS</div>
+    <div class="builder-filter"><input id="builderSearch" type="search" placeholder="🔎 部品名・素材で検索"><select id="builderCategory" aria-label="部品カテゴリ"></select></div>
+    <div id="builderCategoryChips" class="builder-category-chips" aria-label="カテゴリ"></div>
+    <div class="builder-library-tabs"><button type="button" class="active" data-inventory-filter="all">カテゴリ内</button><button type="button" data-inventory-filter="favorites">★ お気に入り</button><button type="button" data-inventory-filter="recent">最近使った</button></div>
+    <div id="builderCatalogCount" class="builder-catalog-count">500 ITEMS</div>
     <div id="builderAssetList" class="builder-asset-list"></div>
     <div id="builderCatalogDetail" class="builder-catalog-detail">部品を選択してください。</div>
    </section>
    <section class="builder-tools">
-    <div class="builder-toolbar"><button id="builderWirePower" class="primary">ϟ 電源配線</button><button id="builderWireControl">⌘ 制御線</button><button id="builderCancelMode">モード解除</button></div>
+    <div class="builder-toolbar"><button id="builderWirePower" class="primary">ϟ 電源接続</button><button id="builderWireControl">⌘ 信号接続</button><button id="builderSnapToggle" class="active">🧲 接合吸着 ON</button><button id="builderGridToggle" class="active">▦ グリッド ON</button><button id="builderCancelMode">解除</button></div>
     <div id="builderModeStatus" class="builder-mode-status">部品を選び「この部品を配置」を押したあと、金属製ロケット発射台のデッキをクリックしてください。</div>
     <div id="builderSelectedInfo" class="builder-selected-info"><b>部品未選択</b><small>配置済みパーツを3D画面でクリックすると編集できます。</small></div>
     <div class="builder-power-state"><b>BUILD GRID / 電力状態</b><span id="builderPowerState">発電機と建築部品を電源線でつないでください。</span></div>
@@ -673,16 +793,60 @@ function buildResearchCampus(){
 }
 
 let builderGroundPick=new T.Mesh(new T.PlaneGeometry(480,480),new T.MeshBasicMaterial({transparent:true,opacity:0,depthWrite:false,side:T.DoubleSide}));builderGroundPick.rotation.x=-Math.PI/2;builderGroundPick.position.y=.24;builderScene.add(builderGroundPick);buildResearchCampus();
+
+// Third-person workshop avatar: a friendly, non-combat industrial technician.
+const builderPlayer=new T.Group();builderPlayer.visible=false;builderPlayer.userData.velocity=new T.Vector3();builderPlayer.userData.walkPhase=0;builderScene.add(builderPlayer);
+const playerM={suit:new T.MeshStandardMaterial({color:0x277e86,roughness:.62,metalness:.12}),vest:new T.MeshStandardMaterial({color:0xf2a93b,roughness:.7}),dark:new T.MeshStandardMaterial({color:0x263d4a,roughness:.8}),skin:new T.MeshStandardMaterial({color:0xd6a27f,roughness:.85}),helmet:new T.MeshStandardMaterial({color:0xffd15d,roughness:.42,metalness:.12}),visor:new T.MeshStandardMaterial({color:0x244c5b,metalness:.45,roughness:.22}),light:new T.MeshStandardMaterial({color:0x72f1df,emissive:0x155b56,emissiveIntensity:.45})};
+function playerBox(w,h,d,x,y,z,mat,parent=builderPlayer){const m=new T.Mesh(new T.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m;}
+function buildThirdPersonAvatar(){
+ const torso=new T.Group();torso.position.y=1.12;builderPlayer.add(torso);
+ playerBox(.62,.72,.34,0,0,0,playerM.suit,torso);playerBox(.66,.32,.37,0,.12,-.015,playerM.vest,torso);
+ playerBox(.11,.5,.05,-.2,.08,-.185,playerM.light,torso);playerBox(.11,.5,.05,.2,.08,-.185,playerM.light,torso);
+ playerBox(.32,.28,.32,0,.57,0,playerM.skin,torso);playerBox(.46,.2,.45,0,.72,0,playerM.helmet,torso);playerBox(.38,.12,.08,0,.57,-.205,playerM.visor,torso);
+ playerBox(.2,.28,.25,0,-.43,.25,playerM.dark,torso);
+ const armL=new T.Group();armL.position.set(-.4,.25,0);torso.add(armL);playerBox(.19,.53,.2,0,-.2,0,playerM.dark,armL);playerBox(.2,.22,.21,0,-.47,-.01,playerM.skin,armL);
+ const armR=new T.Group();armR.position.set(.4,.25,0);torso.add(armR);playerBox(.19,.53,.2,0,-.2,0,playerM.dark,armR);playerBox(.2,.22,.21,0,-.47,-.01,playerM.skin,armR);
+ const legL=new T.Group();legL.position.set(-.18,.72,0);builderPlayer.add(legL);playerBox(.22,.54,.24,0,-.26,0,playerM.suit,legL);playerBox(.26,.14,.37,0,-.54,-.055,playerM.dark,legL);
+ const legR=new T.Group();legR.position.set(.18,.72,0);builderPlayer.add(legR);playerBox(.22,.54,.24,0,-.26,0,playerM.suit,legR);playerBox(.26,.14,.37,0,-.54,-.055,playerM.dark,legR);
+ builderPlayer.userData.parts={torso,armL,armR,legL,legR};
+ const shadow=new T.Mesh(new T.CircleGeometry(.56,24),new T.MeshBasicMaterial({color:0x173449,transparent:true,opacity:.18,depthWrite:false}));shadow.rotation.x=-Math.PI/2;shadow.position.y=.255;builderPlayer.add(shadow);
+}
+buildThirdPersonAvatar();
+let builderTouchMove={x:0,y:0},builderTouchLook=null,builderSprintTouch=false;
+
 const builderMachineGroup=new T.Group();builderScene.add(builderMachineGroup);
 function syncBuilderMachineModels(){builderMachineGroup.clear();builderMachineModels=[];const sources=placed.slice().sort((a,b)=>a.id-b.id);sources.forEach((d,i)=>{const col=i%4,row=Math.floor(i/4),x=-73+col*6.0,z=39+row*6.0;const pedestal=bwBox(builderMachineGroup,3.8,.55,3.8,x,.55,z,bwM.steel);const top=bwBox(builderMachineGroup,3.65,.08,3.65,x,.87,z,bwM.dark);let proxy;
   if(d.model){proxy=d.model.clone(true);proxy.position.set(x,.95,z);proxy.scale.setScalar(.78);builderMachineGroup.add(proxy);}else{proxy=bwBox(builderMachineGroup,2,2,2,x,1.8,z,bwM.blue);}
   const label=bwLabel(`${d.name} #${d.id}`,x,6.3,z,.5);builderMachineGroup.add(label);builderMachineModels.push({id:d.id,model:proxy,position:new T.Vector3(x,.95,z),label});
  });buildLinks.forEach(l=>refreshBuildLinkLine(l));}
 function resizeBuilderWorld(){const w=Math.max(1,builderCanvas.clientWidth||innerWidth),h=Math.max(1,builderCanvas.clientHeight||innerHeight);builderRenderer.setSize(w,h,false);builderCamera.aspect=w/h;builderCamera.updateProjectionMatrix();}
-function enterBuilderWalk(){builderWalkMode=true;builderControls.enabled=false;builderCamera.position.set(0,1.8,37);builderYaw=0;builderPitch=0;builderCamera.rotation.order='YXZ';builderCamera.rotation.set(builderPitch,builderYaw,0);$('builderWalkToggle').textContent='✥ 編集モードへ';$('builderWorldMode').textContent='WALK MODE · クリックで視点操作';$('builderWorldCrosshair').style.display='block';$('builderWorldLocation').textContent='金属製発射台を歩行中 · WASD移動 / マウス視点 / Shift走行';toast('徒歩モード：3D画面をクリックしてマウス視点を有効化。WASDで歩行、Shiftで走行、Escで解除。');}
-function exitBuilderWalk(){builderWalkMode=false;builderWalkKeys.clear();if(document.pointerLockElement===builderCanvas)document.exitPointerLock();builderControls.enabled=true;builderCamera.position.set(92,66,112);builderControls.target.set(0,1,-10);builderControls.update();$('builderWalkToggle').textContent='🚶 徒歩モード';$('builderWorldMode').textContent='EDIT MODE';$('builderWorldCrosshair').style.display='none';$('builderWorldLocation').textContent='MAIN STEEL LAUNCH DECK · 金属製発射台';}
-builderCanvas.addEventListener('click',()=>{if(builderWalkMode&&document.pointerLockElement!==builderCanvas&&builderCanvas.requestPointerLock)builderCanvas.requestPointerLock();});document.addEventListener('pointerlockchange',()=>{if(builderWalkMode&&document.pointerLockElement===builderCanvas){$('builderWorldMode').textContent='WALK MODE · マウス視点有効 / Escで解除';}else if(builderWalkMode&&document.pointerLockElement!==builderCanvas){exitBuilderWalk();}});document.addEventListener('mousemove',e=>{if(!builderWalkMode||document.pointerLockElement!==builderCanvas)return;builderYaw-=e.movementX*.0022;builderPitch=Math.max(-1.15,Math.min(1.15,builderPitch-e.movementY*.0022));builderCamera.rotation.set(builderPitch,builderYaw,0);});
-let builderPointerDown=null;builderCanvas.addEventListener('contextmenu',e=>e.preventDefault());builderCanvas.addEventListener('pointerdown',e=>{if(e.button===0)builderPointerDown={x:e.clientX,y:e.clientY,id:e.pointerId};});builderCanvas.addEventListener('pointerup',e=>{if(builderWalkMode||e.button!==0||!builderPointerDown)return;const moved=Math.hypot(e.clientX-builderPointerDown.x,e.clientY-builderPointerDown.y);builderPointerDown=null;if(moved>5)return;const rect=builderCanvas.getBoundingClientRect();mouse.x=(e.clientX-rect.left)/rect.width*2-1;mouse.y=-(e.clientY-rect.top)/rect.height*2+1;ray.setFromCamera(mouse,builderCamera);handleBuildPointer(e);});
+function enterBuilderWalk(){
+ builderWalkMode=true;builderControls.enabled=false;builderPlayer.visible=true;builderPlayer.position.set(0,.24,36);builderPlayer.rotation.y=builderYaw=0;builderPitch=.18;builderWalkKeys.clear();builderTouchMove={x:0,y:0};builderSprintTouch=false;
+ builderCamera.position.set(0,4,44);builderCamera.lookAt(0,1.5,36);$('builderWalkToggle').textContent='🛠 建築モードへ';$('builderWorldMode').textContent='THIRD PERSON · 三人称探索';$('builderWorldCrosshair').style.display='none';$('builderWorldLocation').textContent='';builderWorldOverlay.classList.add('walking');document.body.classList.add('builder-walking');$('builderPanel').classList.remove('open');
+ toast('三人称モード：WASDで移動、マウスで視点回転。スマホは左下パッドで移動、画面をスワイプして視点変更。');
+}
+function exitBuilderWalk(){
+ builderWalkMode=false;builderWalkKeys.clear();builderTouchMove={x:0,y:0};builderSprintTouch=false;builderPlayer.visible=false;
+ if(document.pointerLockElement===builderCanvas)document.exitPointerLock();document.body.classList.remove('builder-walking');builderWorldOverlay.classList.remove('walking');builderControls.enabled=true;builderCamera.position.set(92,66,112);builderControls.target.set(0,1,-10);builderControls.update();$('builderWalkToggle').textContent='🚶 三人称モード';$('builderWorldMode').textContent='BUILD MODE';$('builderWorldCrosshair').style.display='none';$('builderWorldLocation').textContent='OPEN WORKSHOP ISLAND · METAL DECK';
+}
+builderCanvas.addEventListener('click',()=>{if(builderWalkMode&&document.pointerLockElement!==builderCanvas&&!window.matchMedia('(pointer: coarse)').matches&&builderCanvas.requestPointerLock)builderCanvas.requestPointerLock();});
+document.addEventListener('pointerlockchange',()=>{if(builderWalkMode)$('builderWorldMode').textContent=document.pointerLockElement===builderCanvas?'THIRD PERSON · マウス視点 / Escで解除':'THIRD PERSON · WASD / ドラッグ視点';});
+document.addEventListener('mousemove',e=>{if(!builderWalkMode||document.pointerLockElement!==builderCanvas)return;builderYaw-=e.movementX*.0024;builderPitch=Math.max(-.08,Math.min(.52,builderPitch-e.movementY*.0018));});
+let builderPointerDown=null;builderCanvas.addEventListener('contextmenu',e=>e.preventDefault());
+builderCanvas.addEventListener('pointerdown',e=>{if(builderWalkMode&&e.pointerType==='touch'){builderTouchLook={id:e.pointerId,x:e.clientX,y:e.clientY};return;}if(e.button===0&&!builderWalkMode)builderPointerDown={x:e.clientX,y:e.clientY,id:e.pointerId};});
+builderCanvas.addEventListener('pointermove',e=>{
+ if(builderWalkMode&&builderTouchLook&&builderTouchLook.id===e.pointerId){const dx=e.clientX-builderTouchLook.x,dy=e.clientY-builderTouchLook.y;builderYaw-=dx*.006;builderPitch=Math.max(-.08,Math.min(.52,builderPitch-dy*.004));builderTouchLook.x=e.clientX;builderTouchLook.y=e.clientY;return;}
+ if(!builderWalkMode&&buildPlacementAsset){const p=getGroundPoint(e);if(p){const q=snapBuilderPoint(p);if(builderPreview){builderPreview.position.set(q.x,.24,q.z);builderPreview.visible=true;}}}
+});
+builderCanvas.addEventListener('pointerup',e=>{if(builderWalkMode&&builderTouchLook&&builderTouchLook.id===e.pointerId){builderTouchLook=null;return;}if(builderWalkMode||e.button!==0||!builderPointerDown)return;const moved=Math.hypot(e.clientX-builderPointerDown.x,e.clientY-builderPointerDown.y);builderPointerDown=null;if(moved>5)return;const rect=builderCanvas.getBoundingClientRect();mouse.x=(e.clientX-rect.left)/rect.width*2-1;mouse.y=-(e.clientY-rect.top)/rect.height*2+1;ray.setFromCamera(mouse,builderCamera);handleBuildPointer(e);});
+const walkPad=$('builderTouchPad'),walkKnob=$('builderTouchKnob');let walkPadPointer=null;
+walkPad.addEventListener('pointerdown',e=>{if(!builderWalkMode)return;walkPadPointer=e.pointerId;walkPad.setPointerCapture(e.pointerId);updateWalkPad(e);e.preventDefault();});
+function updateWalkPad(e){const rect=walkPad.getBoundingClientRect(),cx=rect.left+rect.width/2,cy=rect.top+rect.height/2;let dx=(e.clientX-cx)/42,dy=(e.clientY-cy)/42;const len=Math.hypot(dx,dy);if(len>1){dx/=len;dy/=len;}builderTouchMove={x:dx,y:dy};walkKnob.style.transform=`translate(calc(-50% + ${dx*34}px),calc(-50% + ${dy*34}px))`;}
+walkPad.addEventListener('pointermove',e=>{if(walkPadPointer===e.pointerId)updateWalkPad(e);});
+function releaseWalkPad(e){if(walkPadPointer!==e.pointerId)return;walkPadPointer=null;builderTouchMove={x:0,y:0};walkKnob.style.transform='translate(-50%,-50%)';}
+walkPad.addEventListener('pointerup',releaseWalkPad);walkPad.addEventListener('pointercancel',releaseWalkPad);walkPad.addEventListener('lostpointercapture',()=>{walkPadPointer=null;builderTouchMove={x:0,y:0};walkKnob.style.transform='translate(-50%,-50%)';});
+$('builderTouchSprint').addEventListener('pointerdown',e=>{if(builderWalkMode){builderSprintTouch=true;e.currentTarget.setPointerCapture(e.pointerId);e.preventDefault();}});$('builderTouchSprint').addEventListener('pointerup',()=>builderSprintTouch=false);$('builderTouchSprint').addEventListener('pointercancel',()=>builderSprintTouch=false);
+
 
 scene.add(new T.HemisphereLight(0x9fc9ee,0x182130,2.0));const keyLight=new T.DirectionalLight(0xc9e8ff,3.5);keyLight.position.set(9,16,8);keyLight.castShadow=true;keyLight.shadow.mapSize.set(2048,2048);keyLight.shadow.bias=-.00025;scene.add(keyLight);const fillLight=new T.DirectionalLight(0x5aa9c8,1.25);fillLight.position.set(-10,9,-6);scene.add(fillLight);const warm=new T.PointLight(0xff813c,42,27);warm.position.set(-4,5,-3);scene.add(warm);const cool=new T.PointLight(0x42d9ff,32,28);cool.position.set(5,4,4);scene.add(cool);const rimLight=new T.PointLight(0x9e75ff,16,20);rimLight.position.set(0,5,-7);scene.add(rimLight);const amberBounce=new T.PointLight(0xffb34d,14,19);amberBounce.position.set(-8,2.7,4.5);scene.add(amberBounce);const cyanBounce=new T.PointLight(0x49eaff,18,22);cyanBounce.position.set(8,3.3,-4.7);scene.add(cyanBounce);const violetBounce=new T.PointLight(0x8b72ff,8,15);violetBounce.position.set(0,2.2,7);scene.add(violetBounce);
 // Tiny suspended particles add scale and depth without external assets.
@@ -1362,7 +1526,7 @@ for(const cat of BUILD_CATEGORIES){
  }));
 }
 let buildAssets=[],buildLinks=[],nextBuildId=1,buildSelectedId=null,buildPlacementAsset=null,buildMoveMode=false,buildConnectMode='',buildConnectFirst=null,buildCreativeMode=false,builderCategory='structure',builderSearch='',pilotState=null;
-const builderRing=new T.Mesh(new T.TorusGeometry(.72,.035,8,48),new T.MeshBasicMaterial({color:0xffc43b,transparent:true,opacity:.98}));builderRing.rotation.x=Math.PI/2;builderRing.position.y=.39;builderRing.visible=false;builderScene.add(builderRing);
+const builderRing=new T.Mesh(new T.TorusGeometry(.72,.035,8,48),new T.MeshBasicMaterial({color:0xffc43b,transparent:true,opacity:.98}));builderRing.rotation.x=Math.PI/2;builderRing.position.y=.39;builderRing.visible=false;builderScene.add(builderRing);let builderPreview=null,builderSnapEnabled=true,builderGridEnabled=true;
 const pilotKeys=new Set();
 const BUILDER_TUTORIAL_STEPS=[
  {title:'資材を選択する',text:'左側の部品カタログから「構造用鋼 床プレート」をクリック。黄色い枠が付いたカードを選んでください。',status:'部品カードをクリックしてください。',target:'[data-build-asset="structure-01-steel"]'},
@@ -1377,7 +1541,7 @@ const BUILDER_TUTORIAL_STEPS=[
 function builderTutorialActive(){return builderWorldOpen&&!builderTutorialDone;}
 function updateBuilderTutorial(){
  const box=$('builderTutorial');if(!box)return;document.querySelectorAll('.nf-tutorial-target').forEach(el=>el.classList.remove('nf-tutorial-target'));
- const done=builderTutorialDone,step=Math.max(0,Math.min(7,builderTutorialStep));box.style.display=builderWorldOpen?'block':'none';if($('builderCategory'))$('builderCategory').disabled=!done;if($('builderSearch'))$('builderSearch').disabled=!done;if($('builderCreative'))$('builderCreative').disabled=!done;if($('builderWalkToggle'))$('builderWalkToggle').disabled=!done;if($('builderWirePower'))$('builderWirePower').disabled=!done;if($('builderWireControl'))$('builderWireControl').disabled=!done&&step!==6;
+ const done=builderTutorialDone,step=Math.max(0,Math.min(7,builderTutorialStep));box.style.display=builderWorldOpen?'block':'none';if($('builderCategory'))$('builderCategory').disabled=!done;if($('builderSearch'))$('builderSearch').disabled=!done;if($('builderCreative'))$('builderCreative').disabled=!done;if($('builderWalkToggle'))$('builderWalkToggle').disabled=false;if($('builderWirePower'))$('builderWirePower').disabled=!done;if($('builderWireControl'))$('builderWireControl').disabled=!done&&step!==6;
  if(done){$('builderTutorialStep').textContent='TRAINING COMPLETE';$('builderTutorialTitle').textContent='操作訓練完了';$('builderTutorialText').textContent='配置・選択・回転・移動・複製・接続・保存を実際に操作しました。これで自由建築が解放されています。';$('builderTutorialProgress').style.width='100%';$('builderTutorialStatus').textContent='全操作を確認済み · 自由建築 OK';$('builderTutorialCount').textContent='8 / 8';$('builderTutorialDonePanel').hidden=false;}
  else{const st=BUILDER_TUTORIAL_STEPS[step];$('builderTutorialStep').textContent=`STEP ${String(step+1).padStart(2,'0')} / 08`;$('builderTutorialTitle').textContent=st.title;$('builderTutorialText').textContent=step===6&&buildConnectMode==='control'?(buildConnectFirst?'1つ目の部品を選択しました。複製したもう1枚を3D画面でクリックしてください。':'制御線モードです。1枚目の床プレートを3D画面でクリックしてください。'):st.text;$('builderTutorialProgress').style.width=`${step/8*100}%`;$('builderTutorialStatus').textContent=step===6&&buildConnectMode==='control'?(buildConnectFirst?'接続先をクリックしてください。':'接続元をクリックしてください。'):st.status;$('builderTutorialCount').textContent=`${step} / 8`;$('builderTutorialDonePanel').hidden=true;const targetSel=step===6&&buildConnectMode==='control'?'#builderWorldCanvas':st.target;const target=document.querySelector(targetSel);if(target)target.classList.add('nf-tutorial-target');}
 }
@@ -1464,19 +1628,40 @@ function removeBuildAsset(id,refund=true){
  if(refund&&!buildCreativeMode)funds+=Math.round(a.cost*.5);
  if(buildSelectedId===id)buildSelectedId=null;if(pilotState?.assetIds?.includes(id)||pilotState?.controllerId===id)stopPilotTest();updateBuilderSelection();renderBuilderStats();updateMetrics();saveGame(false);
 }
-function buildCategoryOptions(){return BUILD_CATEGORIES.map(c=>`<option value="${c.id}" ${builderCategory===c.id?'selected':''}>${c.name} · ${BUILD_ASSET_CATALOG.filter(x=>x.category===c.id).length}</option>`).join('');}
+function buildCategoryOptions(){return `<option value="all" ${builderCategory==='all'?'selected':''}>全カテゴリ · ${BUILD_ASSET_CATALOG.length}</option>`+BUILD_CATEGORIES.map(c=>`<option value="${c.id}" ${builderCategory===c.id?'selected':''}>${c.name} · ${BUILD_ASSET_CATALOG.filter(x=>x.category===c.id).length}</option>`).join('');}
+let builderCatalogSelected=BUILD_ASSET_CATALOG[0]?.id||'';
+let builderInventoryFilter='all';let builderFavorites=new Set();let builderRecent=[];
+try{builderFavorites=new Set(JSON.parse(localStorage.getItem('nfBuilderFavorites')||'[]'));}catch(e){builderFavorites=new Set();}
+try{builderRecent=JSON.parse(localStorage.getItem('nfBuilderRecent')||'[]').filter(id=>BUILD_ASSET_CATALOG.some(a=>a.id===id));}catch(e){builderRecent=[];}
+const BUILDER_CATEGORY_ICONS={all:'▦',structure:'▧',building:'🏠',thermal:'♨',electric:'ϟ',mechanical:'⚙',control:'⌘',piping:'〰',robotics:'🤖',production:'▤',decor:'✦'};
+function renderBuilderCategoryChips(){const host=$('builderCategoryChips');if(!host)return;const rows=[{id:'all',name:'すべて',count:BUILD_ASSET_CATALOG.length},...BUILD_CATEGORIES.map(c=>({id:c.id,name:c.name.replace('・','/'),count:BUILD_ASSET_CATALOG.filter(a=>a.category===c.id).length}))];host.innerHTML=rows.map(c=>`<button type="button" class="builder-category-chip ${builderCategory===c.id?'active':''}" data-category="${c.id}">${BUILDER_CATEGORY_ICONS[c.id]||'•'} ${c.name} <small>${c.count}</small></button>`).join('');host.querySelectorAll('[data-category]').forEach(btn=>btn.onclick=()=>{if(builderTutorialActive()){toast('操作訓練中は、指定されたカテゴリを使ってください。');return;}builderCategory=btn.dataset.category;$('builderCategory').value=builderCategory;renderBuilderCategoryChips();renderBuilderCatalog();});}
+function renderBuilderInventoryTabs(){document.querySelectorAll('.builder-library-tabs [data-inventory-filter]').forEach(btn=>btn.classList.toggle('active',btn.dataset.inventoryFilter===builderInventoryFilter));}
+function rememberBuilderAsset(id){builderRecent=[id,...builderRecent.filter(x=>x!==id)].slice(0,12);try{localStorage.setItem('nfBuilderRecent',JSON.stringify(builderRecent));}catch(e){}updateBuilderQuickbar();}
+function toggleBuilderFavorite(id){if(builderFavorites.has(id))builderFavorites.delete(id);else builderFavorites.add(id);try{localStorage.setItem('nfBuilderFavorites',JSON.stringify([...builderFavorites]));}catch(e){}renderBuilderCatalog();updateBuilderQuickbar();}
 function renderBuilderCatalog(){
  const list=$('builderAssetList');if(!list)return;
- const q=(builderSearch||'').trim().toLowerCase();const rows=BUILD_ASSET_CATALOG.filter(a=>a.category===builderCategory&&(!q||`${a.name} ${a.form} ${a.material}`.toLowerCase().includes(q)));
- $('builderCatalogCount').textContent=`${rows.length} / ${BUILD_ASSET_CATALOG.length} ASSETS`;
- list.innerHTML=rows.map(a=>`<button class="builder-asset-card ${builderCatalogSelected===a.id?'active':''}" data-build-asset="${a.id}"><span class="builder-asset-swatch" style="--swatch:#${a.color.toString(16).padStart(6,'0')}"></span><span class="builder-asset-title">${a.name}</span><span class="builder-asset-meta">${a.cost.toLocaleString('ja-JP')} Cr · ${a.powerW?`${a.powerW.toLocaleString('ja-JP')} W`:'受動部品'}</span></button>`).join('')||'<div class="builder-empty">検索に一致する部品がありません。</div>';
- list.querySelectorAll('[data-build-asset]').forEach(btn=>btn.onclick=()=>{if(builderTutorialGuard(0))return;if(builderTutorialActive()&&btn.dataset.buildAsset!=='structure-01-steel'){toast('訓練では黄色く光っている「構造用鋼 床プレート」を選択してください。');return;}builderCatalogSelected=btn.dataset.buildAsset;renderBuilderCatalog();updateBuilderCatalogDetail();if(builderTutorialActive())advanceBuilderTutorial(0);});
+ const q=(builderSearch||'').trim().toLowerCase();let rows=BUILD_ASSET_CATALOG.filter(a=>{
+  const text=`${a.name} ${a.form} ${a.material} ${a.categoryName}`.toLowerCase();
+  const categoryOK=!!q||builderCategory==='all'||a.category===builderCategory;
+  const tabOK=builderInventoryFilter==='favorites'?builderFavorites.has(a.id):builderInventoryFilter==='recent'?builderRecent.includes(a.id):true;
+  return categoryOK&&tabOK&&(!q||text.includes(q));
+ });
+ if(builderInventoryFilter==='recent')rows.sort((a,b)=>builderRecent.indexOf(a.id)-builderRecent.indexOf(b.id));
+ $('builderCatalogCount').textContent=`${rows.length} ITEMS / ${BUILD_ASSET_CATALOG.length} ASSETS`;
+ list.innerHTML=rows.map(a=>`<div class="builder-asset-card ${builderCatalogSelected===a.id?'active':''}" role="button" tabindex="0" data-build-asset="${a.id}"><span class="builder-asset-swatch" style="--swatch:#${a.color.toString(16).padStart(6,'0')}"></span><span class="builder-asset-title">${a.name}</span><span class="builder-asset-meta">${a.cost.toLocaleString('ja-JP')} Cr · ${a.powerW?`${a.powerW.toLocaleString('ja-JP')} W`:'電力不要'}</span><button type="button" class="builder-fav ${builderFavorites.has(a.id)?'on':''}" data-fav-id="${a.id}" aria-label="お気に入り">${builderFavorites.has(a.id)?'★':'☆'}</button></div>`).join('')||'<div class="builder-empty">該当アイテムがありません。カテゴリや検索条件を変えてください。</div>';
+ list.querySelectorAll('[data-fav-id]').forEach(btn=>btn.onclick=e=>{e.stopPropagation();toggleBuilderFavorite(btn.dataset.favId);});
+ list.querySelectorAll('[data-build-asset]').forEach(card=>{const choose=()=>{if(builderTutorialGuard(0))return;if(builderTutorialActive()&&card.dataset.buildAsset!=='structure-01-steel'){toast('訓練では「構造用鋼 床プレート」を選んでください。');return;}builderCatalogSelected=card.dataset.buildAsset;rememberBuilderAsset(builderCatalogSelected);renderBuilderCatalog();updateBuilderCatalogDetail();if(builderTutorialActive())advanceBuilderTutorial(0);};card.onclick=e=>{if(e.target.closest('[data-fav-id]'))return;choose();};card.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose();}};});
+ renderBuilderInventoryTabs();
 }
-let builderCatalogSelected=BUILD_ASSET_CATALOG[0]?.id||'';
+function setBuilderPlacementPreview(id){const def=buildAssetDef(id);if(!def)return;buildPlacementAsset=id;buildMoveMode=false;buildConnectMode='';if(builderPreview){builderScene.remove(builderPreview);builderPreview.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material){const mats=Array.isArray(o.material)?o.material:[o.material];mats.forEach(m=>m.dispose());}});builderPreview=null;}builderPreview=makeBuildModel(def,0,0,0,1);builderPreview.traverse(o=>{if(o.isMesh){o.castShadow=false;o.receiveShadow=false;const mats=Array.isArray(o.material)?o.material:[o.material];o.material=Array.isArray(o.material)?mats.map(m=>{const c=m.clone();c.transparent=true;c.opacity=.42;c.depthWrite=false;return c;}):mats[0].clone();if(!Array.isArray(o.material)){o.material.transparent=true;o.material.opacity=.42;o.material.depthWrite=false;}}});builderPreview.position.set(0,.24,0);builderPreview.visible=true;builderPreview.userData.isPreview=true;builderScene.add(builderPreview);$('builderModeStatus').textContent=`設置プレビュー：${def.name}。青いゴーストを確認して、地面をクリックしてください。`;updateBuilderTutorial();}
+function snapBuilderPoint(p){if(!p)return p;let x=p.x,z=p.z;if(builderGridEnabled){x=Math.round(x*2)/2;z=Math.round(z*2)/2;}if(builderSnapEnabled&&buildAssets.length){let near=null,dist=1.65;for(const a of buildAssets){if(buildMoveMode&&a.id===buildSelectedId)continue;const d=Math.hypot(x-a.x,z-a.z);if(d<dist){dist=d;near=a;}}if(near){const dx=x-near.x,dz=z-near.z;if(Math.abs(dx)>Math.abs(dz)){x=near.x+(dx>=0?1:-1);z=near.z;}else{x=near.x;z=near.z+(dz>=0?1:-1);}if(builderGridEnabled){x=Math.round(x*2)/2;z=Math.round(z*2)/2;}}}return{x,z};}
+function updateBuilderQuickbar(){const host=$('builderQuickbar');if(!host)return;const defaults=['structure-01-steel','building-01-steel','structure-02-steel','mechanical-01-steel','piping-06-steel','electric-01-steel'];const picks=[...builderRecent,...defaults].filter((id,i,a)=>a.indexOf(id)===i&&buildAssetDef(id)).slice(0,6);while(picks.length<6){const a=BUILD_ASSET_CATALOG[picks.length];if(a)picks.push(a.id);else break;}host.innerHTML=picks.map((id,i)=>{const a=buildAssetDef(id);return `<button type="button" class="builder-quick-slot ${builderCatalogSelected===id?'active':''}" data-quick-asset="${id}" title="${a.name}"><span class="builder-quick-icon" style="background:#${a.color.toString(16).padStart(6,'0')}"></span><span>${a.form.slice(0,5)}</span><small>${i+1}</small></button>`;}).join('');host.querySelectorAll('[data-quick-asset]').forEach(btn=>btn.onclick=()=>{if(builderTutorialActive()){toast('チュートリアル完了後にクイック建築を使えます。');return;}builderCatalogSelected=btn.dataset.quickAsset;builderCategory=buildAssetDef(builderCatalogSelected).category;$('builderCategory').value=builderCategory;builderSearch='';$('builderSearch').value='';builderInventoryFilter='all';renderBuilderCategoryChips();renderBuilderCatalog();updateBuilderCatalogDetail();if(builderWalkMode)exitBuilderWalk();$('builderPanel').classList.add('open');});}
+function activateBuilderQuickSlot(index){const slots=$('builderQuickbar')?.querySelectorAll('[data-quick-asset]');if(slots&&slots[index])slots[index].click();}
+
 function updateBuilderCatalogDetail(){
  const a=buildAssetDef(builderCatalogSelected);const el=$('builderCatalogDetail');if(!el)return;if(!a){el.textContent='部品を選択してください。';return;}
  el.innerHTML=`<b>${a.name}</b><p>${a.desc}</p><div class="builder-detail-grid"><span>購入費 <strong>${a.cost.toLocaleString('ja-JP')} Cr</strong></span><span>消費電力 <strong>${a.powerW.toLocaleString('ja-JP')} W</strong></span><span>質量 <strong>${a.weightKg} kg</strong></span></div><button id="builderPlaceBtn" class="primary">この部品を配置</button>`;
- $('builderPlaceBtn').disabled=builderTutorialActive()&&builderTutorialStep!==1;$('builderPlaceBtn').onclick=()=>{if(builderTutorialGuard(1))return;buildPlacementAsset=a.id;buildMoveMode=false;buildConnectMode='';$('builderModeStatus').textContent=`配置モード：${a.name}。金属デッキ上をクリックして配置してください。`;$('builderPlaceBtn').classList.add('active');updateBuilderTutorial();};
+ $('builderPlaceBtn').disabled=builderTutorialActive()&&builderTutorialStep!==1;$('builderPlaceBtn').onclick=()=>{if(builderTutorialGuard(1))return;setBuilderPlacementPreview(a.id);$('builderPlaceBtn').classList.add('active');rememberBuilderAsset(a.id);};
 }
 function updateBuilderSelection(){
  const a=buildAssets.find(x=>x.id===buildSelectedId);builderRing.visible=!!a;if(a){builderRing.position.set(a.x,.4,a.z);builderRing.scale.setScalar(a.scale||1);}
@@ -1553,8 +1738,8 @@ function handleBuildPointer(e){
   if(addBuildLink(buildConnectFirst,ep,buildConnectMode)){const finishedType=buildConnectMode;buildConnectMode='';buildConnectFirst=null;$('builderModeStatus').textContent='接続完了。別の線を追加するには配線ボタンを押してください。';updateBuilderPowerUI(lastBuilderPowerStats);if(builderTutorialActive()&&builderTutorialStep===6&&finishedType==='control')advanceBuilderTutorial(6);}
   else toast('この組み合わせは接続できません。別の端点を選んでください。');return true;
  }
- if(buildMoveMode){const p=getGroundPoint(e);if(!p)return true;const a=buildAssets.find(x=>x.id===buildSelectedId);if(!a)return true;if(buildAssets.some(x=>x.id!==a.id&&Math.hypot(x.x-p.x,x.z-p.z)<.42)){toast('別の部品と重なっています。');return true;}a.x=p.x;a.z=p.z;a.model.position.set(a.x,.24,a.z);buildLinks.forEach(l=>{if((l.aType==='asset'&&l.aId===a.id)||(l.bType==='asset'&&l.bId===a.id))refreshBuildLinkLine(l);});buildMoveMode=false;updateBuilderSelection();renderBuilderStats();saveGame(false);toast(`${a.name}を移動しました。`);if(builderTutorialActive())advanceBuilderTutorial(4);return true;}
- if(buildPlacementAsset){const p=getGroundPoint(e);if(!p)return true;const def=buildAssetDef(buildPlacementAsset);if(!def)return true;if(buildAssets.some(x=>Math.hypot(x.x-p.x,x.z-p.z)<.42)){toast('同じ場所に部品があります。少しずらして配置してください。');return true;}if(!buildCreativeMode&&funds<def.cost){toast(`資金不足です。${def.cost} Cr必要です。`);return true;}if(!buildCreativeMode)funds-=def.cost;const a=addBuildAsset(def.id,p.x,p.z,0,null,true);if(a){buildSelectedId=a.id;updateBuilderSelection();renderBuilderStats();updateMetrics();saveGame(false);$('builderModeStatus').textContent=`配置済み：${def.name}。続けてクリックすると同じ部品を追加配置できます。`;if(builderTutorialActive()&&builderTutorialStep===1){buildPlacementAsset=null;advanceBuilderTutorial(1);}}
+ if(buildMoveMode){const p=snapBuilderPoint(getGroundPoint(e));if(!p)return true;const a=buildAssets.find(x=>x.id===buildSelectedId);if(!a)return true;if(buildAssets.some(x=>x.id!==a.id&&Math.hypot(x.x-p.x,x.z-p.z)<.42)){toast('別の部品と重なっています。');return true;}a.x=p.x;a.z=p.z;a.model.position.set(a.x,.24,a.z);buildLinks.forEach(l=>{if((l.aType==='asset'&&l.aId===a.id)||(l.bType==='asset'&&l.bId===a.id))refreshBuildLinkLine(l);});buildMoveMode=false;updateBuilderSelection();renderBuilderStats();saveGame(false);toast(`${a.name}を移動しました。`);if(builderTutorialActive())advanceBuilderTutorial(4);return true;}
+ if(buildPlacementAsset){const p=snapBuilderPoint(getGroundPoint(e));if(!p)return true;const def=buildAssetDef(buildPlacementAsset);if(!def)return true;if(buildAssets.some(x=>Math.hypot(x.x-p.x,x.z-p.z)<.42)){toast('同じ場所に部品があります。少しずらして配置してください。');return true;}if(!buildCreativeMode&&funds<def.cost){toast(`資金不足です。${def.cost} Cr必要です。`);return true;}if(!buildCreativeMode)funds-=def.cost;const a=addBuildAsset(def.id,p.x,p.z,0,null,true);if(a){buildSelectedId=a.id;updateBuilderSelection();renderBuilderStats();updateMetrics();saveGame(false);$('builderModeStatus').textContent=`配置済み：${def.name}。続けてクリックすると同じ部品を追加配置できます。`;if(builderTutorialActive()&&builderTutorialStep===1){buildPlacementAsset=null;advanceBuilderTutorial(1);}}
  return true;}
  return false;
 }
@@ -1563,21 +1748,33 @@ function movePilotAssembly(dt){if(!pilotState||dt<=0)return;const st=lastBuilder
  if(!dx&&!dz&&!rot)return;const ids=new Set(pilotState.assetIds),bounds=getWorkbenchBounds();const members=buildAssets.filter(a=>ids.has(a.id));if(members.some(a=>Math.abs(a.x+dx)>bounds.x-.35||Math.abs(a.z+dz)>bounds.z-.35))return;for(const a of members){a.x+=dx;a.z+=dz;a.rotation=(a.rotation+rot)%(Math.PI*2);a.model.position.x=a.x;a.model.position.z=a.z;a.model.rotation.y=a.rotation;}
  for(const l of buildLinks)if((l.aType==='asset'&&ids.has(l.aId))||(l.bType==='asset'&&ids.has(l.bId)))refreshBuildLinkLine(l);
 }
-function openBuilder(){const panel=$('builderPanel');panel.classList.add('open');document.body.classList.add('builder-world-open');builderWorldOverlay.classList.add('open');builderWorldOpen=true;syncBuilderMachineModels();resizeBuilderWorld();builderControls.enabled=true;builderCamera.position.set(92,66,112);builderControls.target.set(0,1,-10);builderControls.update();$('builderCategory').innerHTML=buildCategoryOptions();$('builderCategory').value=builderCategory;renderBuilderCatalog();updateBuilderCatalogDetail();renderBuilderStats();updateBuilderPowerUI(lastBuilderPowerStats);$('builderWorldMode').textContent='EDIT MODE';updateBuilderTutorial();toast(builderTutorialDone?'金属製ロケット発射台を開きました。自由建築が利用できます。':'必須トレーニングを開始します。画面右上の黄色い指示を実際に完了してください。');}
-function closeBuilder(){const p=$('builderPanel');p.classList.remove('open');builderWorldOverlay.classList.remove('open');document.body.classList.remove('builder-world-open');builderWorldOpen=false;exitBuilderWalk();buildPlacementAsset=null;buildMoveMode=false;buildConnectMode='';buildConnectFirst=null;updateBuilderTutorial();}
-$('buildModeBtn').onclick=openBuilder;$('builderClose').onclick=closeBuilder;$('builderWorldExit').onclick=closeBuilder;$('builderWalkToggle').onclick=()=>{if(builderTutorialActive()){toast('先に必須トレーニングを完了してください。');return;}builderWalkMode?exitBuilderWalk():enterBuilderWalk();};$('builderWorldSave').onclick=()=>{if(builderTutorialActive()&&builderTutorialStep!==7){toast('保存操作はチュートリアル最後のステップです。黄色い指示を先に完了してください。');return;}saveGame(true);if(builderTutorialActive()&&builderTutorialStep===7){builderTutorialDone=true;builderTutorialStep=8;updateBuilderTutorial();updateBuilderCatalogDetail();updateBuilderSelection();saveGame(false);toast('訓練完了。自由建築が解放されました。');}};$('builderWorldGuide').onclick=()=>openEmbeddedBook();
-$('builderCategory').onchange=e=>{builderCategory=e.target.value;renderBuilderCatalog();};$('builderSearch').oninput=e=>{builderSearch=e.target.value;renderBuilderCatalog();};
+function openBuilder(){const panel=$('builderPanel');panel.classList.add('open');document.body.classList.add('builder-world-open');builderWorldOverlay.classList.add('open');builderWorldOpen=true;syncBuilderMachineModels();resizeBuilderWorld();builderControls.enabled=true;builderPlayer.visible=false;builderCamera.position.set(92,66,112);builderControls.target.set(0,1,-10);builderControls.update();$('builderCategory').innerHTML=buildCategoryOptions();$('builderCategory').value=builderCategory;renderBuilderCategoryChips();renderBuilderCatalog();updateBuilderCatalogDetail();updateBuilderQuickbar();renderBuilderStats();updateBuilderPowerUI(lastBuilderPowerStats);$('builderWorldMode').textContent='BUILD MODE';updateBuilderTutorial();toast(builderTutorialDone?'ワークショップを開きました。部品を選択して設置できます。':'操作トレーニングを開始します。部品選択→設置→編集→接続を順番に体験してください。');}
+function closeBuilder(){const p=$('builderPanel');p.classList.remove('open');builderWorldOverlay.classList.remove('open');document.body.classList.remove('builder-world-open');builderWorldOpen=false;exitBuilderWalk();buildPlacementAsset=null;buildMoveMode=false;buildConnectMode='';buildConnectFirst=null;if(builderPreview){builderScene.remove(builderPreview);builderPreview.traverse(o=>{o.geometry?.dispose();if(o.material){const ms=Array.isArray(o.material)?o.material:[o.material];ms.forEach(m=>m.dispose());}});builderPreview=null;}updateBuilderTutorial();}
+$('buildModeBtn').onclick=openBuilder;$('builderClose').onclick=()=>{$('builderPanel').classList.remove('open');};$('builderWorldExit').onclick=closeBuilder;$('builderWalkToggle').onclick=()=>{if(builderWalkMode){exitBuilderWalk();$('builderPanel').classList.add('open');}else enterBuilderWalk();};$('builderWorldSave').onclick=()=>{if(builderTutorialActive()&&builderTutorialStep!==7){toast('保存操作はチュートリアル最後のステップです。黄色い指示を先に完了してください。');return;}saveGame(true);if(builderTutorialActive()&&builderTutorialStep===7){builderTutorialDone=true;builderTutorialStep=8;updateBuilderTutorial();updateBuilderCatalogDetail();updateBuilderSelection();saveGame(false);toast('訓練完了。自由建築が解放されました。');}};$('builderWorldGuide').onclick=()=>openEmbeddedBook();
+$('builderCategory').onchange=e=>{builderCategory=e.target.value;renderBuilderCategoryChips();renderBuilderCatalog();};$('builderSearch').oninput=e=>{builderSearch=e.target.value;renderBuilderCatalog();};document.querySelectorAll('.builder-library-tabs [data-inventory-filter]').forEach(btn=>btn.onclick=()=>{builderInventoryFilter=btn.dataset.inventoryFilter;renderBuilderInventoryTabs();renderBuilderCatalog();});$('builderBagToggle').onclick=()=>{if(builderWalkMode)exitBuilderWalk();$('builderPanel').classList.toggle('open');};
 $('builderWirePower').onclick=()=>{if(builderTutorialActive()){toast('訓練では、まず2つの部品を制御線でつなぎます。');return;}buildPlacementAsset=null;buildMoveMode=false;buildConnectMode='power';buildConnectFirst=null;$('builderModeStatus').textContent='電源配線：まず発電機、次に建築パーツをクリック。既に給電された部品から延長もできます。';};
 $('builderWireControl').onclick=()=>{if(builderTutorialGuard(6))return;buildPlacementAsset=null;buildMoveMode=false;buildConnectMode='control';buildConnectFirst=null;$('builderModeStatus').textContent='制御線：操縦桿を起点に、操作したい作業ロボット部品をクリック。';updateBuilderTutorial();};
-$('builderCancelMode').onclick=()=>{buildPlacementAsset=null;buildMoveMode=false;buildConnectMode='';buildConnectFirst=null;$('builderModeStatus').textContent='モード解除。部品を選び、配置・配線を行えます。';};
+$('builderCancelMode').onclick=()=>{buildPlacementAsset=null;buildMoveMode=false;buildConnectMode='';buildConnectFirst=null;if(builderPreview){builderScene.remove(builderPreview);builderPreview.traverse(o=>{o.geometry?.dispose();if(o.material){const ms=Array.isArray(o.material)?o.material:[o.material];ms.forEach(m=>m.dispose());}});builderPreview=null;}$('builderModeStatus').textContent='モード解除。部品を選び、配置・配線を行えます。';};$('builderSnapToggle').onclick=()=>{builderSnapEnabled=!builderSnapEnabled;$('builderSnapToggle').classList.toggle('active',builderSnapEnabled);$('builderSnapToggle').textContent=builderSnapEnabled?'🧲 接合吸着 ON':'🧲 接合吸着 OFF';};$('builderGridToggle').onclick=()=>{builderGridEnabled=!builderGridEnabled;$('builderGridToggle').classList.toggle('active',builderGridEnabled);$('builderGridToggle').textContent=builderGridEnabled?'▦ グリッド ON':'▦ グリッド OFF';};
 $('builderPilotStop').onclick=stopPilotTest;
 $('builderCreative').onchange=e=>{buildCreativeMode=!!e.target.checked;toast(buildCreativeMode?'クリエイティブ建築：配置費用なし':'通常建築：配置時に資金を消費');};
-$('builderGuideBtn').onclick=()=>{if(builderTutorialDone)restartBuilderTutorial();else updateBuilderTutorial();toast('画面右上の訓練カードに沿って、各操作を実際に実行してください。スキップはできません。');};$('builderTutorialReplay').onclick=restartBuilderTutorial;
+$('builderGuideBtn').onclick=()=>{if(builderTutorialDone)restartBuilderTutorial();else updateBuilderTutorial();toast('画面右上の訓練カードに沿って、各操作を実際に実行してください。スキップはできません。');};$('builderTutorialReplay').onclick=restartBuilderTutorial;renderBuilderCategoryChips();renderBuilderInventoryTabs();updateBuilderQuickbar();
 window.addEventListener('keydown',e=>{if(pilotState){const k=e.key.toLowerCase();if(['w','a','s','d','arrowup','arrowdown','arrowleft','arrowright','q','e'].includes(k)){pilotKeys.add(k);e.preventDefault();}if(k==='escape')stopPilotTest();}if(!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName)&&buildSelectedId!=null){if(e.key.toLowerCase()==='r')rotateBuildAsset(buildSelectedId);if(e.key==='Delete'||e.key==='Backspace')removeBuildAsset(buildSelectedId,true);}});
 window.addEventListener('keyup',e=>pilotKeys.delete(e.key.toLowerCase()));
-window.addEventListener('keydown',e=>{if(!builderWorldOpen||['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;const k=e.key.toLowerCase();if(builderWalkMode){if(['w','a','s','d','shift'].includes(k)){builderWalkKeys.add(k);e.preventDefault();}if(k==='escape'){exitBuilderWalk();e.preventDefault();}return;}if(buildSelectedId!=null&&k==='r'){rotateBuildAsset(buildSelectedId);e.preventDefault();}if(buildSelectedId!=null&&k==='g'){buildMoveMode=true;buildPlacementAsset=null;buildConnectMode='';$('builderModeStatus').textContent='移動モード：新しい位置を左クリックしてください。';e.preventDefault();}if(k==='escape'){$('builderCancelMode').click();}});
-window.addEventListener('keyup',e=>builderWalkKeys.delete(e.key.toLowerCase()));
-function updateBuilderWalk(dt){if(!builderWorldOpen||!builderWalkMode||document.pointerLockElement!==builderCanvas)return;let f=0,r=0;if(builderWalkKeys.has('w'))f+=1;if(builderWalkKeys.has('s'))f-=1;if(builderWalkKeys.has('d'))r+=1;if(builderWalkKeys.has('a'))r-=1;if(!f&&!r)return;const speed=(builderWalkKeys.has('shift')?18:7)*dt;const forward=new T.Vector3(-Math.sin(builderYaw),0,-Math.cos(builderYaw));const right=new T.Vector3(Math.cos(builderYaw),0,-Math.sin(builderYaw));builderCamera.position.addScaledVector(forward,f*speed);builderCamera.position.addScaledVector(right,r*speed);builderCamera.position.x=Math.max(-235,Math.min(235,builderCamera.position.x));builderCamera.position.z=Math.max(-235,Math.min(235,builderCamera.position.z));builderCamera.position.y=1.8;}
+window.addEventListener('keydown',e=>{if(!builderWorldOpen||['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;const k=e.key.toLowerCase();if(builderWalkMode){if(['w','a','s','d','arrowup','arrowdown','arrowleft','arrowright','shift'].includes(k)){builderWalkKeys.add(k);e.preventDefault();}if(k==='escape'){exitBuilderWalk();e.preventDefault();}return;}if(/^[1-6]$/.test(k)){activateBuilderQuickSlot(+k-1);e.preventDefault();return;}if(buildSelectedId!=null&&k==='r'){rotateBuildAsset(buildSelectedId);e.preventDefault();}if(buildSelectedId!=null&&k==='g'){buildMoveMode=true;buildPlacementAsset=null;buildConnectMode='';$('builderModeStatus').textContent='移動モード：新しい位置を左クリックしてください。';e.preventDefault();}if(k==='escape'){$('builderCancelMode').click();}});
+window.addEventListener('keyup',e=>builderWalkKeys.delete(e.key.toLowerCase()));window.addEventListener('blur',()=>{builderWalkKeys.clear();builderTouchMove={x:0,y:0};builderSprintTouch=false;});
+function updateBuilderWalk(dt){
+ if(!builderWorldOpen||!builderWalkMode)return;
+ let f=(builderWalkKeys.has('w')||builderWalkKeys.has('arrowup')?1:0)-(builderWalkKeys.has('s')||builderWalkKeys.has('arrowdown')?1:0)-builderTouchMove.y;
+ let r=(builderWalkKeys.has('d')||builderWalkKeys.has('arrowright')?1:0)-(builderWalkKeys.has('a')||builderWalkKeys.has('arrowleft')?1:0)+builderTouchMove.x;
+ const moving=Math.hypot(f,r)>.08;const forward=new T.Vector3(-Math.sin(builderYaw),0,-Math.cos(builderYaw));const right=new T.Vector3(Math.cos(builderYaw),0,-Math.sin(builderYaw));
+ const direction=forward.multiplyScalar(f).add(right.multiplyScalar(r));if(direction.lengthSq()>1)direction.normalize();
+ const speed=(builderWalkKeys.has('shift')||builderSprintTouch?12.5:6.8);const velocity=builderPlayer.userData.velocity;const desired=direction.multiplyScalar(moving?speed:0);velocity.lerp(desired,1-Math.exp(-dt*(moving?9:12)));
+ const old=builderPlayer.position.clone();builderPlayer.position.addScaledVector(velocity,dt);builderPlayer.position.x=Math.max(-86,Math.min(86,builderPlayer.position.x));builderPlayer.position.z=Math.max(-86,Math.min(86,builderPlayer.position.z));
+ for(const a of buildAssets){const dx=builderPlayer.position.x-a.x,dz=builderPlayer.position.z-a.z,dist=Math.hypot(dx,dz);if(dist<.72&&dist>.001){builderPlayer.position.x=a.x+dx/dist*.72;builderPlayer.position.z=a.z+dz/dist*.72;}}
+ builderPlayer.position.y=.24;builderPlayer.rotation.y=builderYaw;
+ const parts=builderPlayer.userData.parts;if(parts){if(moving){builderPlayer.userData.walkPhase+=dt*(builderSprintTouch||builderWalkKeys.has('shift')?11:8);const swing=Math.sin(builderPlayer.userData.walkPhase)*.52;parts.legL.rotation.x=swing;parts.legR.rotation.x=-swing;parts.armL.rotation.x=-swing*.62;parts.armR.rotation.x=swing*.62;}else{parts.legL.rotation.x*=.78;parts.legR.rotation.x*=.78;parts.armL.rotation.x*=.78;parts.armR.rotation.x*=.78;}}
+ const target=builderPlayer.position.clone().add(new T.Vector3(0,1.28,0));const distance=7.7;const offset=new T.Vector3(Math.sin(builderYaw)*distance,2.4+builderPitch*5.4,Math.cos(builderYaw)*distance);const desiredCamera=target.clone().add(offset);builderCamera.position.lerp(desiredCamera,1-Math.exp(-dt*8.5));builderCamera.lookAt(target);
+}
 
 function clearBuilderWorld(){buildLinks.forEach(l=>{if(l.line){builderScene.remove(l.line);l.line.geometry?.dispose();l.line.material?.dispose();}});buildAssets.forEach(a=>builderScene.remove(a.model));buildLinks=[];buildAssets=[];nextBuildId=1;buildSelectedId=null;stopPilotTest();updateBuilderSelection();}
 function restoreBuilderWorld(data){clearBuilderWorld();for(const s of (Array.isArray(data?.builderAssets)?data.builderAssets:[])){const def=buildAssetDef(s.assetId);if(!def||!Number.isFinite(+s.x)||!Number.isFinite(+s.z))continue;addBuildAsset(s.assetId,+s.x,+s.z,+s.rotation||0,+s.id,true,Number.isFinite(+s.scale)?+s.scale:1);}for(const l of (Array.isArray(data?.builderLinks)?data.builderLinks:[])){const a={type:l.aType,id:+l.aId},b={type:l.bType,id:+l.bId};if(!['machine','asset'].includes(a.type)||!['machine','asset'].includes(b.type)||!['power','control'].includes(l.type))continue;if(buildEndpointExists(a)&&buildEndpointExists(b))addBuildLink(a,b,l.type,true);}buildSelectedId=buildAssets.length?buildAssets[buildAssets.length-1].id:null;updateBuilderSelection();renderBuilderStats();}
