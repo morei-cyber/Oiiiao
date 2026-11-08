@@ -274,6 +274,55 @@ body.builder-world-open .builder-selected-info>b,body.builder-world-open .builde
 </style>
 
 </head><body>
+
+<style>
+/* Prototype Service + broad, touch-friendly hit areas */
+body button{min-height:42px;padding:10px 13px;touch-action:manipulation}
+#builderPanel button{min-height:42px}
+#builderPanel .builder-edit-actions{gap:7px}
+#builderPanel .builder-edit-actions button{min-height:46px;padding:9px 5px;font-size:10px}
+.builder-world-actions{gap:8px}
+.builder-world-actions button{min-height:44px;padding:10px 13px;font-size:11px}
+.builder-world-actions .prototype-launch-btn{border-color:#eac35a;background:linear-gradient(180deg,#806526,#4b3915);color:#fff8dc;box-shadow:0 0 16px #ffcf5524,inset 0 1px #fff5c633;font-weight:900}
+.builder-world-actions .prototype-launch-btn:hover{border-color:#fff0a6;background:linear-gradient(180deg,#9a7930,#5a451b)}
+.prototype-modal{position:fixed;inset:0;z-index:110;display:none;place-items:center;padding:16px;background:rgba(1,8,14,.78);backdrop-filter:blur(8px)}
+.prototype-modal.open{display:grid}
+.prototype-shell{width:min(1120px,96vw);max-height:min(90vh,900px);display:flex;flex-direction:column;overflow:hidden;border:1px solid #9aabb4;border-radius:17px;background:linear-gradient(145deg,#263640 0%,#101c25 75%);box-shadow:0 28px 90px #000b;color:#edf5f8}
+.prototype-head{display:flex;justify-content:space-between;gap:18px;align-items:center;padding:18px 20px;background:linear-gradient(110deg,#43555f,#192832);border-bottom:1px solid #71828c}
+.prototype-kicker{font-size:9px;letter-spacing:.18em;color:#f0c95e;font-weight:900}
+.prototype-head h2{margin:5px 0 4px;font-size:21px;letter-spacing:.06em;color:#fff6dc}
+.prototype-head p{margin:0;color:#c2d0d6;font-size:11px;line-height:1.55}
+.prototype-head-side{display:grid;grid-template-columns:1fr auto;align-items:center;gap:5px 12px;min-width:190px;text-align:right}
+.prototype-credit-label{font-size:8px;letter-spacing:.16em;color:#a8bbc5}.prototype-head-side strong{font-size:17px;color:#f9d875;white-space:nowrap}.prototype-head-side button{grid-column:1/-1;justify-self:end;background:#263a46;border-color:#7b8d97;color:#edf5f8}
+.prototype-body{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(280px,.9fr);gap:14px;padding:15px;overflow:auto;min-height:0}
+.prototype-catalog-wrap,.prototype-inventory-wrap{min-width:0}
+.prototype-section-title{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:0 0 10px;padding:0 2px 8px;border-bottom:1px solid #536672}
+.prototype-section-title b{font-size:12px;color:#eaf3f6;letter-spacing:.04em}.prototype-section-title span{font-size:9px;color:#9fb2bc}
+.prototype-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.prototype-card{min-width:0;padding:13px;border:1px solid #5c6d77;border-radius:12px;background:linear-gradient(150deg,#263943,#172630);box-shadow:inset 0 1px #ffffff10}
+.prototype-card-top{display:flex;align-items:center;gap:10px}.prototype-icon{width:42px;height:42px;flex:0 0 42px;display:grid;place-items:center;border-radius:11px;border:1px solid #8797a0;background:#31434c;font-size:22px}
+.prototype-card h3{font-size:13px;margin:0;color:#fff2cd}.prototype-card small{font-size:8px;color:#a9bbc4;letter-spacing:.06em}
+.prototype-card p{font-size:10px;line-height:1.55;color:#c3d0d5;min-height:45px;margin:10px 0}
+.prototype-card-meta{display:flex;justify-content:space-between;gap:7px;font-size:9px;color:#a9bdc7;margin:0 0 9px}.prototype-card-meta strong{color:#f5d675;font-size:12px;white-space:nowrap}
+.prototype-card button{width:100%;font-size:11px;font-weight:850;background:linear-gradient(110deg,#665222,#453719);border-color:#c7a94c;color:#fff5d6}
+.prototype-card button:disabled{filter:grayscale(.7);opacity:.45;cursor:not-allowed}
+.prototype-card .prototype-card-state{font-size:9px;color:#96e5c4;margin-top:7px;min-height:14px}
+.prototype-build-status{margin-top:11px;padding:10px 12px;border:1px solid #8f7942;border-left:4px solid #efc75d;border-radius:8px;background:#302b1d;color:#f6e8bc;font-size:10px;line-height:1.5}
+.prototype-progress{height:6px;background:#4c4c3b;border-radius:9px;overflow:hidden;margin-top:8px}.prototype-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#e0ad40,#fff0a3);transition:width .15s}
+.prototype-inventory{max-height:390px;overflow:auto;display:grid;gap:8px}
+.prototype-record{border:1px solid #526772;border-radius:10px;background:#1a2a34;overflow:hidden}
+.prototype-record-head{padding:10px 11px;display:flex;justify-content:space-between;gap:8px;align-items:center;background:#293e49}
+.prototype-record-head b{font-size:11px;color:#f6e8c0}.prototype-record-head span{font-size:9px;color:#a9c1cc;white-space:nowrap}
+.prototype-part-list{padding:7px;display:grid;gap:5px}
+.prototype-part-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 6px;border-bottom:1px solid #ffffff0c}
+.prototype-part-row span{font-size:9px;line-height:1.35;color:#c8d6dc;min-width:0}.prototype-part-row button{flex:0 0 auto;min-height:36px;padding:6px 9px;font-size:9px;background:#263f4b;border-color:#668493;color:#e5f5f7}
+.prototype-empty{padding:18px 12px;text-align:center;color:#a9bdc7;font-size:10px;line-height:1.6;border:1px dashed #536873;border-radius:10px}
+.prototype-edit-hint{margin-top:12px;padding:10px 12px;border-radius:9px;border:1px solid #596d78;background:#172832}.prototype-edit-hint b{font-size:10px;color:#f3d26f}.prototype-edit-hint p{margin:5px 0 0;font-size:9px;line-height:1.55;color:#b8c8cf}
+.prototype-foot{display:flex;justify-content:space-between;gap:12px;padding:10px 16px;border-top:1px solid #52636d;background:#101b23;color:#9eafb8;font-size:8px;line-height:1.5}
+@media(max-width:760px){body button{min-height:48px}.prototype-modal{padding:5px}.prototype-shell{width:100%;max-height:96vh;border-radius:12px}.prototype-head{padding:12px;align-items:flex-start}.prototype-head h2{font-size:17px}.prototype-head p{font-size:10px;max-width:420px}.prototype-head-side{min-width:118px;gap:4px}.prototype-head-side strong{font-size:14px}.prototype-body{grid-template-columns:1fr;gap:15px;padding:10px}.prototype-cards{grid-template-columns:1fr}.prototype-card p{min-height:0}.prototype-inventory{max-height:230px}.prototype-foot{font-size:7px}.builder-world-actions{gap:4px;max-width:68%;flex-wrap:wrap;justify-content:flex-end}.builder-world-actions button{font-size:9px;padding:8px 9px;min-height:44px}}
+@media(max-width:420px){.prototype-head{gap:8px}.prototype-head-side{min-width:102px}.prototype-credit-label{font-size:7px}.prototype-head-side strong{font-size:12px}.prototype-head-side button{font-size:9px;padding:7px}.prototype-kicker{font-size:7px}.prototype-section-title b{font-size:11px}.prototype-card{padding:10px}}
+</style>
+
 <canvas id="world"></canvas><div id="vignette"></div>
 <header class="top"><div class="brand panel"><div class="logo">ϟ</div><div><b>NEURAL//FABRIC</b><small>FACTORY ENGINEERING · LARGE POWER PLANT</small></div></div><div class="metrics"><div class="metric panel"><label>FUNDS</label><strong id="funds">500 <small>Cr</small></strong></div><div class="metric panel"><label>THERMAL INPUT</label><strong id="heat">0 <small>kW</small></strong></div><div class="metric panel"><label>SHAFT POWER</label><strong id="shaft">0 <small>kW</small></strong></div><div class="metric panel"><label>ELECTRIC OUTPUT</label><strong id="power">0.00 <small>kW</small></strong></div><div class="metric panel"><label>GOLD PRODUCTION</label><strong id="goldRate">0 <small>Cr/s</small></strong></div><div class="metric panel stock-metric"><label>COPPER STOCK</label><strong id="copperStock">0.0 <small>m</small></strong></div></div><div class="actions"><button id="guideBtn">GUIDE</button><button id="buildModeBtn" title="500種類の部品で自由建築">🏗 自由建築</button><button id="researchBtn" title="研究・設備改造・アタッチメント">🧪 研究・改造</button><button id="bookBtn" title="詳しいガイドブックを開く">📘 ガイドブック</button><button id="connectBtn" class="connect-action">⌁ 接続スタート</button><button id="saveBtn">SAVE</button><button id="backupBtn" title="保存データをJSONファイルに書き出す">BACKUP ↓</button><button id="restoreBtn" title="バックアップJSONを読み込む">LOAD ↑</button><button id="menuBtn">MENU</button></div></header><input id="saveFileInput" type="file" accept="application/json,.json" hidden>
 <aside id="shop" class="side left panel"><div class="head"><div><div class="eyebrow">STARTER INVENTORY</div><h2>部品を購入・配置</h2></div><button class="close" id="shopClose">−</button></div><div class="intro">個別機械を大量配置する発電所シミュレーター。研究で改造レベルを解放し、設備ごとに大幅な性能改善と最大2個のアタッチメントを追加できます。熱・軸・電力・制御は手動で接続し、敷地の詰め方と経路設計で効率を積み上げます。</div><div class="link-selector"><label for="linkTypeSelect">CONNECTION STANDARD / 接続規格</label><select id="linkTypeSelect"><option value="thermal" selected>熱配管</option><option value="shaft">回転軸</option><option value="electric">銅ケーブル</option><option value="material">搬送ライン</option><option value="control">制御ケーブル</option></select><small>接続規格は毎回手動で指定します。自動ルート選択はありません。線の長さは設備の設置位置と端子間の実際の経路で決まり、移動すると抵抗・電圧降下・損失も変わります。</small></div><div class="scroll" id="shopList"></div><div class="foot"><button id="cancelBtn">配置キャンセル</button><button id="wireBtn">接続モード開始</button></div></aside>
@@ -290,6 +339,7 @@ body.builder-world-open .builder-selected-info>b,body.builder-world-open .builde
  <div class="builder-world-top">
   <div class="builder-world-brand"><strong>METAL LAUNCH DECK / ENGINEERING PAD</strong><small>晴天の金属製発射台 · 3D BUILD & TEST FIELD</small></div>
   <div class="builder-world-actions">
+   <button id="prototypeCenterBtn" class="prototype-launch-btn">🏗 試作設計センター</button>
    <button id="builderWalkToggle">🚶 徒歩モード</button>
    <button id="builderWorldGuide">📘 建築ガイド</button>
    <button id="builderWorldSave">保存</button>
@@ -341,6 +391,29 @@ body.builder-world-open .builder-selected-info>b,body.builder-world-open .builde
 </div>
 <div id="bookModal" aria-label="完全ガイドブック" role="dialog" aria-modal="true"><section class="book-shell"><div class="book-modal-head"><div><b>NEURAL//FABRIC · COMPLETE FIELD GUIDE</b><small>ゲーム内ガイドブック / いつでもESCまたは閉じるで戻れます</small></div><button id="closeBook" type="button">ガイドを閉じる ✕</button></div><iframe id="bookFrame" title="NEURAL//FABRIC 完全ガイドブック" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" loading="lazy"></iframe></section></div>
 <div id="help"><section class="helpbox"><div class="eyebrow">ENGINEERING NOTES</div><h2>エネルギー変換のルール</h2><p>熱機関はカルノー効率を基準にしたゲーム内高出力モデルです。強化設備によって理論上限に近い性能や、ゲーム独自の出力倍率を発揮します。熱配管・回転軸の長さによる損失、軸受・断熱・熱回収の効果を計算します。電気配線では銅の抵抗率と I²R 損失に加え、変圧器を経由した区間の配電電圧を考慮します。蓄電池は銅線で電力網へ接続すると1台最大6,000 Whを保存します。余剰電力が増えるほど充電速度が上がり、1台最大12,000 W。放電補助は最大3,000 W/台（充放電効率99%）です。フライホイールは回転軸上で最大3,600 Whを蓄え、余剰軸出力から最大5,000 Wで充電し、最大5,000 Wを短時間放出します（効率99%）。画面下のENERGY STORAGEと設備詳細でWh・残量率を確認できます。稼働中の発電出力（kW）は金収益の電力ボーナスに反映され、ボーナス倍率は最大×5.0です。進行は約10秒ごとに自動保存され、復帰時は最大12時間の放置収益を反映します。SAVEに加え、BACKUPでJSONを書き出し、LOADで復元できます。</p><p>熱発生器1台の定格熱出力は1 MW（1,000 kW）、補助ボイラーは750 kWです。発電量は熱入力・熱機関効率・回転軸損失・発電機効率・配線損失から計算され、人工的なGW上限やGW級の定格は使いません。基本設備は4種類。そこから <b>電力設備・機械設備・熱工学設備・製造設備・制御／自動化・高効率発電</b>の6つの装備メニューを研究費で解放できます。別画面の「研究・改造」では耐熱材料→タービン空力→高温合金などの研究ツリーを進め、各機械を個別にLv.I〜IIIへ改造し、適合アタッチメントを装着できます。同種設備を統合すると定格能力・改造・部品効果を継承して合算します。外形サイズは統合しても変わりません。熱増長機は熱出力2倍、発電能力増強器は発電出力2倍を狙えます。超高効率ワイヤーは導電率+200%、超伝導磁気軸受は軸損失係数×0.15です。通常5メニューは各5装備、高効率発電は上位5装備で、研究費は100 / 220 / 320 / 450 / 700 / 1,100 Crです。装備は、熱経路・回転軸経路・電力網・材料ライン・制御網に正しく接続された場合のみ効果を発揮します。接続モードの規格選択で目的に合う線を選び、設置位置と経路長を調整して効率を比較してください。</p><div style="text-align:right"><button id="closeHelp">閉じる</button></div></section></div>
+
+<div id="prototypeModal" class="prototype-modal" role="dialog" aria-modal="true" aria-labelledby="prototypeModalTitle">
+ <div class="prototype-shell">
+  <header class="prototype-head">
+   <div><div class="prototype-kicker">NEURAL//FABRIC · AUTOMATED FABRICATION</div><h2 id="prototypeModalTitle">試作設計センター</h2><p>ゲーム内通貨で設計モデルを発注。既存の500種の建築部品を使い、発射台上に自動組立します。</p></div>
+   <div class="prototype-head-side"><div class="prototype-credit-label">AVAILABLE CREDITS</div><strong id="prototypeCredits">0 Cr</strong><button id="prototypeClose" aria-label="閉じる">閉じる ✕</button></div>
+  </header>
+  <div class="prototype-body">
+   <section class="prototype-catalog-wrap">
+    <div class="prototype-section-title"><b>完成済み設計パッケージ</b><span>組立費・標準部品込み</span></div>
+    <div id="prototypeCards" class="prototype-cards"></div>
+    <div id="prototypeBuildStatus" class="prototype-build-status" aria-live="polite">試作品を選択してください。購入後、部品単位で編集できます。</div>
+   </section>
+   <aside class="prototype-inventory-wrap">
+    <div class="prototype-section-title"><b>組立履歴 / COMPONENT REGISTER</b><span id="prototypeRecordCount">0 件</span></div>
+    <div id="prototypeInventory" class="prototype-inventory"><div class="prototype-empty">まだ試作品はありません。左のパッケージから発注できます。</div></div>
+    <div class="prototype-edit-hint"><b>個別編集</b><p>部品名を押すと3D画面でその部品を選択します。ワークショップの編集欄から回転・移動・拡大縮小・複製・撤去ができます。</p></div>
+   </aside>
+  </div>
+  <footer class="prototype-foot"><span>試作品は設計・展示用の組立モデルです。ロケットは推進・発射機能を持たない静態展示です。</span><span>PROTOTYPE SERVICE · v1.0</span></footer>
+ </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script><script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script>
 (()=>{'use strict';
@@ -1512,5 +1585,130 @@ function restoreBuilderWorld(data){clearBuilderWorld();for(const s of (Array.isA
 const oldSave=loadGame();if(oldSave){restoreGame(oldSave);const offlineSeconds=applyOfflineProgress(oldSave);renderShop();updateMetrics();renderInspect();if(offlineSeconds>=5){const c=calc();toast(`自動復元完了 · オフライン ${(offlineSeconds/3600).toFixed(1)} 時間 · +${(funds-(+oldSave.funds||0)).toFixed(1)} Cr`);}saveGame(false);}else{workbenchLevel=0;funds=500;unlocked=0;unlockedMenus={power:false,mechanics:false,thermal:false,production:false,automation:false,advancedPower:false};activeShopCategory='core';researchDone={},attachmentLoot=[];placed=[];links=[];renderShop();updateMetrics();renderInspect();saveGame(false);}updateConnectionButton();setInterval(()=>{if(!paused)saveGame(false);},10000);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')saveGame(false);});window.addEventListener('pagehide',()=>saveGame(false));window.addEventListener('beforeunload',()=>saveGame(false));animate();
 
 if(new URLSearchParams(location.search).has('nf-test')){window.__NF_TEST__={defs,placed,links,addDevice,BUILD_ASSET_CATALOG,buildAssets,buildLinks,get builderTutorialStep(){return builderTutorialStep;},get builderTutorialDone(){return builderTutorialDone;},addBuildAsset,addBuildLink,computeBuilderPowerStats,calc,chain,makeSaveData,restoreGame,deviceEffectInfo,updateMetrics,researchDone,RESEARCH_NODES,ATTACHMENTS,buyResearch,upgradeMachine,installAttachment,get workbenchLevel(){return workbenchLevel;},upgradeWorkbench,unlinkSelected(){const b=$('clearLinksBtn');b?.click();},connectType:(type)=>{const el=$('linkTypeSelect');if(el)el.value=type;},reset(){links.forEach(l=>l.line&&scene.remove(l.line));placed.forEach(d=>d.model&&scene.remove(d.model));placed=[];links=[];objects.length=0;nextId=1;workbenchLevel=0;updateWorkbenchVisuals();funds=1e6;cableMeters=1e6;cableMetersUsed=0;unlockedMenus={power:true,mechanics:true,thermal:true,production:true,automation:true,advancedPower:true};},add(kind,x,z){return addDevice(kind,x,z,null,true);},wire(a,b,type){const el=$('linkTypeSelect');if(el)el.value=type;const da=typeof a==='object'?a:placed.find(d=>d.id===Number(a));const db=typeof b==='object'?b:placed.find(d=>d.id===Number(b));if(!da||!db)return false;return connect(da,db);},snapshot(){const c=calc();return {placed:placed.map(d=>({id:d.id,kind:d.kind,storedWh:d.storedWh,flywheelWh:d.flywheelWh,info:deviceEffectInfo(d,c)})),thermal:c.thermal,shaft:c.shaft,activeGenerators:c.gens.map(d=>d.id),heatKW:c.heatKW,shaftKW:c.shaftKW,electricKW:c.electricKW,goldRate:c.goldRate,sourcePowerW:c.sourcePowerW,powerUsedW:c.powerUsedW,activeProduction:c.activeProduction.map(d=>d.kind),automated:c.automated,batteryChargeW:c.batteryChargeW,batteryDischargeW:c.batteryDischargeW,flywheelChargeW:c.flywheelChargeW,flywheelDischargeW:c.flywheelDischargeW,flywheelStoredWh:c.flywheelStoredWh,thermalLossFrac:c.thermalLossFrac,shaftLossFrac:c.shaftLossFrac,gearboxEff:c.gearboxEff,engineEff:c.engineEff,transformerActive:c.transformerActive,transformerLinkCount:c.transformerLinkCount};}};}
+
+// ── Automated Prototype Design Center ────────────────────────────────────
+const PROTOTYPE_LEDGER_KEY='nf-prototype-ledger-v1';
+const PROTOTYPE_PACKAGES={
+ suit:{key:'suit',name:'パワード作業スーツ',icon:'🦾',price:250000,tag:'WEARABLE WORK-SUIT CONCEPT',description:'装着型フレーム、左右の脚・腕、関節、アクチュエーター、把持ツール、電源パックを組み合わせた非稼働の設計展示モデル。',
+ parts:[
+  ['robotics',5,'steel',0,0,1.42,'中央フレーム'],['control',4,'aluminum',0,-1.02,.82,'計器クラスター'],['robotics',9,'titanium',0,.88,.95,'背面電源パック'],
+  ['robotics',1,'aluminum',-.62,1.35,.98,'左脚ユニット'],['robotics',1,'aluminum',.62,1.35,.98,'右脚ユニット'],
+  ['robotics',3,'steel',-.62,.82,.78,'左脚関節'],['robotics',3,'steel',.62,.82,.78,'右脚関節'],
+  ['robotics',2,'titanium',-1.22,-.05,1.02,'左腕ユニット'],['robotics',2,'titanium',1.22,-.05,1.02,'右腕ユニット'],
+  ['robotics',3,'steel',-1.18,-.52,.78,'左肩関節'],['robotics',3,'steel',1.18,-.52,.78,'右肩関節'],
+  ['robotics',4,'aluminum',-1.42,.36,.78,'左腕アクチュエーター'],['robotics',4,'aluminum',1.42,.36,.78,'右腕アクチュエーター'],
+  ['robotics',7,'steel',0,1.92,.82,'歩行安定ユニット'],['robotics',8,'steel',-1.56,.86,.74,'左把持ツール'],['robotics',8,'steel',1.56,.86,.74,'右把持ツール']
+ ]},
+ rocket:{key:'rocket',name:'大型ロケット静態展示',icon:'🚀',price:800000,tag:'STATIC DISPLAY / NON-PROPULSIVE',description:'ロケット風展示オブジェを中心に、支持架台・安全灯・案内パネルを配置。推進装置・燃料系・発射機能を持たない静態展示です。',
+ parts:[
+  ['decor',4,'titanium',0,0,4.1,'ロケット風展示本体'],['structure',16,'steel',-3.1,.1,1.25,'左側支持架台'],['structure',16,'steel',3.1,.1,1.25,'右側支持架台'],
+  ['structure',20,'steel',-2.05,1.2,1.0,'左側補強梁'],['structure',20,'steel',2.05,1.2,1.0,'右側補強梁'],
+  ['decor',2,'steel',-3.65,-1.1,1.05,'左安全警告灯'],['decor',2,'steel',3.65,-1.1,1.05,'右安全警告灯'],
+  ['decor',3,'aluminum',0,2.35,1.4,'展示情報パネル'],['structure',9,'steel',0,-1.95,1.6,'展示接合プレート']
+ ]},
+ robot:{key:'robot',name:'大型産業用ロボット',icon:'🤖',price:450000,tag:'INDUSTRIAL ROBOT DESIGN',description:'作業フレーム、関節、アクチュエーター、把持ツール、制御盤を備えた産業ロボットの組立見本。駆動・制御は未接続です。',
+ parts:[
+  ['robotics',5,'steel',0,0,1.5,'胴体フレーム'],['robotics',6,'aluminum',0,-1.05,.9,'作業コックピット'],['mechanical',3,'titanium',0,.94,.95,'減速ギアユニット'],
+  ['robotics',1,'steel',-.48,1.55,.9,'左支持脚'],['robotics',1,'steel',.48,1.55,.9,'右支持脚'],
+  ['robotics',3,'steel',-.82,-.42,.86,'左肩関節'],['robotics',3,'steel',.82,-.42,.86,'右肩関節'],
+  ['robotics',2,'titanium',-1.26,-.12,1.12,'左作業アーム'],['robotics',2,'titanium',1.26,-.12,1.12,'右作業アーム'],
+  ['robotics',4,'aluminum',-1.63,.42,.82,'左駆動アクチュエーター'],['robotics',4,'aluminum',1.63,.42,.82,'右駆動アクチュエーター'],
+  ['robotics',8,'steel',-1.9,.93,.78,'左把持ツール'],['robotics',8,'steel',1.9,.93,.78,'右把持ツール'],
+  ['control',5,'steel',0,-1.88,.9,'PLC制御盤'],['electric',1,'aluminum',0,1.95,.72,'電源分電盤']
+ ]},
+ vehicle:{key:'vehicle',name:'電動作業車',icon:'🚚',price:180000,tag:'ELECTRIC UTILITY VEHICLE',description:'車体フレーム、4輪相当の駆動モジュール、運転席、蓄電モジュール、保護フレームを組み合わせた静態設計モデル。',
+ parts:[
+  ['structure',16,'steel',0,0,1.65,'車体メインフレーム'],['structure',1,'aluminum',0,-.15,1.32,'荷台フロア'],
+  ['mechanical',1,'steel',-1.05,-.95,.88,'左前輪モジュール'],['mechanical',1,'steel',1.05,-.95,.88,'右前輪モジュール'],
+  ['mechanical',1,'steel',-1.05,.95,.88,'左後輪モジュール'],['mechanical',1,'steel',1.05,.95,.88,'右後輪モジュール'],
+  ['robotics',6,'aluminum',0,-1.25,.92,'運転席ユニット'],['electric',5,'titanium',0,.72,.92,'蓄電モジュール'],
+  ['control',3,'steel',0,-1.88,.78,'ペダル入力装置'],['control',4,'aluminum',0,-1.58,.72,'計器クラスター'],
+  ['structure',2,'steel',-1.42,0,1.0,'左側面補強梁'],['structure',2,'steel',1.42,0,1.0,'右側面補強梁'],
+  ['decor',1,'steel',-.7,-1.95,.7,'左作業灯'],['decor',1,'steel',.7,-1.95,.7,'右作業灯']
+ ]}
+};
+let prototypeBuilds=[];
+let selectedPrototypeRecordId=null;
+let prototypeBuildBusy=false;
+let prototypeProgressText='';
+function loadPrototypeLedger(){try{const raw=localStorage.getItem(PROTOTYPE_LEDGER_KEY);const v=raw?JSON.parse(raw):[];prototypeBuilds=Array.isArray(v)?v.filter(x=>x&&typeof x.id==='string'&&PROTOTYPE_PACKAGES[x.key]&&Array.isArray(x.partIds)):[];}catch(e){prototypeBuilds=[];}}
+function savePrototypeLedger(){try{localStorage.setItem(PROTOTYPE_LEDGER_KEY,JSON.stringify(prototypeBuilds));return true;}catch(e){return false;}}
+function prototypeMoney(v){return Math.max(0,Math.floor(Number(v)||0)).toLocaleString('ja-JP');}
+function prototypeAssetId(part){return `${part[0]}-${String(part[1]).padStart(2,'0')}-${part[2]}`;}
+function prototypeCount(key){return prototypeBuilds.filter(x=>x.key===key).length;}
+function renderPrototypeInventory(){
+ const root=$('prototypeInventory');if(!root)return;
+ $('prototypeRecordCount').textContent=`${prototypeBuilds.length} 件`;
+ if(!prototypeBuilds.length){root.innerHTML='<div class="prototype-empty">まだ試作品はありません。左のパッケージから発注できます。</div>';return;}
+ const active=prototypeBuilds.find(x=>x.id===selectedPrototypeRecordId)||prototypeBuilds[prototypeBuilds.length-1];selectedPrototypeRecordId=active.id;
+ root.innerHTML=prototypeBuilds.slice().reverse().map(rec=>{
+  const def=PROTOTYPE_PACKAGES[rec.key];const liveIds=rec.partIds.filter(id=>buildAssets.some(a=>a.id===id));
+  const rows=rec.id===active.id?liveIds.map(id=>{const a=buildAssets.find(x=>x.id===id);const role=rec.partRoles?.[id]||a?.name||'部品';return a?`<div class="prototype-part-row"><span><b>${role}</b><br><small>${a.name} · ID B-${String(a.id).padStart(3,'0')} · ${a.weightKg} kg</small></span><button data-proto-part="${a.id}">3Dで選択</button></div>`:''}).join(''):'';
+  return `<section class="prototype-record"><div class="prototype-record-head"><b>${def.icon} ${def.name}</b><span>${liveIds.length}/${rec.partIds.length} 部品</span></div>${rec.id===active.id?`<div class="prototype-part-list">${rows||'<div class="prototype-empty">部品は撤去済みです。</div>'}</div>`:`<div class="prototype-part-list"><button data-proto-record="${rec.id}" style="width:100%">部品リストを表示</button></div>`}</section>`;
+ }).join('');
+ root.querySelectorAll('[data-proto-record]').forEach(btn=>btn.onclick=()=>{selectedPrototypeRecordId=btn.dataset.protoRecord;renderPrototypeInventory();});
+ root.querySelectorAll('[data-proto-part]').forEach(btn=>btn.onclick=()=>focusPrototypePart(Number(btn.dataset.protoPart)));
+}
+function renderPrototypeCenter(){
+ $('prototypeCredits').textContent=`${prototypeMoney(funds)} Cr`;
+ $('prototypeCards').innerHTML=Object.values(PROTOTYPE_PACKAGES).map(p=>{
+  const count=prototypeCount(p.key);const afford=funds>=p.price;const tut=builderTutorialActive();
+  const disabled=prototypeBuildBusy||!afford||tut;
+  const state=tut?'必須トレーニング完了後に利用可能':!afford?`あと ${prototypeMoney(p.price-funds)} Cr 必要`:count?`発注履歴 ${count} 件 · 追加発注可`:'発注可能';
+  return `<article class="prototype-card"><div class="prototype-card-top"><div class="prototype-icon">${p.icon}</div><div><h3>${p.name}</h3><small>${p.tag}</small></div></div><p>${p.description}</p><div class="prototype-card-meta"><span>${p.parts.length} 個の個別部品</span><strong>${prototypeMoney(p.price)} Cr</strong></div><button data-proto-buy="${p.key}" ${disabled?'disabled':''}>${prototypeBuildBusy?'組立処理中…':'この試作品を組み立てる'}</button><div class="prototype-card-state">${state}</div></article>`;
+ }).join('');
+ $('prototypeCards').querySelectorAll('[data-proto-buy]').forEach(btn=>btn.onclick=()=>startPrototypeBuild(btn.dataset.protoBuy));
+ renderPrototypeInventory();
+}
+function openPrototypeCenter(){renderPrototypeCenter();$('prototypeModal').classList.add('open');}
+function closePrototypeCenter(){$('prototypeModal').classList.remove('open');}
+function findPrototypeCenter(packageDef){
+ const candidates=[];for(let x=-60;x<=60;x+=15)for(let z=-60;z<=60;z+=15)candidates.push({x,z});
+ let best=candidates[0],bestScore=Infinity;
+ for(const c of candidates){let score=0;for(const a of buildAssets){const d=Math.hypot(a.x-c.x,a.z-c.z);if(d<10)score+=(10-d)*(10-d);}for(const r of prototypeBuilds){const d=Math.hypot((r.centerX||0)-c.x,(r.centerZ||0)-c.z);if(d<13)score+=(13-d)*(13-d)*2;}if(score<bestScore){bestScore=score;best=c;}}
+ return best;
+}
+function updatePrototypeBuildStatus(message,progress,total){
+ const el=$('prototypeBuildStatus');if(!el)return;const pc=total?Math.round(progress/total*100):0;
+ el.innerHTML=`${message}${total?`<div class="prototype-progress"><span style="width:${pc}%"></span></div>`:''}`;
+}
+async function startPrototypeBuild(key){
+ const p=PROTOTYPE_PACKAGES[key];if(!p||prototypeBuildBusy)return;
+ if(builderTutorialActive()){toast('必須トレーニングを完了すると試作設計センターを利用できます。');return;}
+ if(funds<p.price){toast(`資金が不足しています。${prototypeMoney(p.price-funds)} Cr必要です。`);return;}
+ const missing=p.parts.map(part=>prototypeAssetId(part)).filter(id=>!buildAssetDef(id));if(missing.length){toast(`設計データに不足部品があります：${missing.join(', ')}`);return;}
+ const center=findPrototypeCenter(p);const rec={id:`P-${Date.now()}-${Math.floor(Math.random()*100000)}`,key,centerX:center.x,centerZ:center.z,price:p.price,partIds:[],partRoles:{},createdAt:Date.now()};
+ prototypeBuildBusy=true;funds-=p.price;prototypeBuilds.push(rec);selectedPrototypeRecordId=rec.id;savePrototypeLedger();saveGame(false);updateMetrics();renderPrototypeCenter();
+ updatePrototypeBuildStatus(`${p.name}を自動組立中… 0 / ${p.parts.length} 部品`,0,p.parts.length);
+ toast(`${p.name}の組立を開始しました。費用 ${prototypeMoney(p.price)} Cr`);
+ for(let i=0;i<p.parts.length;i++){
+  const part=p.parts[i];const id=prototypeAssetId(part);const x=center.x+part[3],z=center.z+part[4];
+  const a=addBuildAsset(id,x,z,0,null,true,part[5]||1);
+  if(a){rec.partIds.push(a.id);rec.partRoles[a.id]=part[6]||a.name;}
+  savePrototypeLedger();saveGame(false);
+  updatePrototypeBuildStatus(`${p.name}を自動組立中… ${i+1} / ${p.parts.length} 部品`,i+1,p.parts.length);
+  await new Promise(resolve=>setTimeout(resolve,95));
+ }
+ prototypeBuildBusy=false;
+ buildSelectedId=rec.partIds.length?rec.partIds[0]:null;updateBuilderSelection();renderBuilderStats();updateMetrics();savePrototypeLedger();saveGame(false);
+ if(rec.partIds.length){const first=buildAssets.find(a=>a.id===rec.partIds[0]);if(first){builderControls.target.set(first.x,.5,first.z);builderCamera.position.set(first.x+13,13,first.z+17);builderControls.update();}}
+ renderPrototypeCenter();updatePrototypeBuildStatus(`<b>組立完了</b>：${p.name} · ${rec.partIds.length} 個の部品を3D発射台に配置しました。部品一覧の「3Dで選択」から個別編集できます。`,p.parts.length,p.parts.length);
+ toast(`${p.name}の組立完了 · ${rec.partIds.length} 個の個別部品を配置しました。`);
+}
+function focusPrototypePart(id){
+ const a=buildAssets.find(x=>x.id===id);if(!a){toast('この部品はすでに撤去されています。');renderPrototypeInventory();return;}
+ buildSelectedId=id;buildPlacementAsset=null;buildMoveMode=false;buildConnectMode='';buildConnectFirst=null;updateBuilderSelection();
+ builderControls.target.set(a.x,.5,a.z);builderCamera.position.set(a.x+9,8,a.z+11);builderControls.update();
+ closePrototypeCenter();$('builderModeStatus').textContent=`試作品部品を選択中：${a.name}。回転・移動・拡大縮小・複製・撤去ができます。`;
+ toast(`${a.name}を選択しました。左側の編集ボタンで調整できます。`);
+}
+$('prototypeCenterBtn').onclick=openPrototypeCenter;
+$('prototypeClose').onclick=closePrototypeCenter;
+$('prototypeModal').addEventListener('click',e=>{if(e.target===$('prototypeModal'))closePrototypeCenter();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('prototypeModal').classList.contains('open'))closePrototypeCenter();});
+loadPrototypeLedger();renderPrototypeCenter();
+if(window.__NF_TEST__){window.__NF_TEST__.prototypePackages=PROTOTYPE_PACKAGES;window.__NF_TEST__.prototypeBuilds=prototypeBuilds;window.__NF_TEST__.startPrototypeBuild=startPrototypeBuild;}
+// ── End Prototype Design Center ──────────────────────────────────────────
+
 })();
 </script></body></html>
