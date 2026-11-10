@@ -587,7 +587,7 @@ body.builder-world-open #builderQuickbar{bottom:17px!important}
 .builder-channel-box>small{font-size:8px;line-height:1.5;color:#9ab7c7}
 .builder-channel-assign{display:grid;grid-template-columns:auto minmax(90px,1fr);gap:7px;align-items:center;margin:7px 0;padding:7px;border:1px solid #315d6b;border-radius:7px;background:#0a1e2a}
 .builder-channel-assign label{font-size:9px;color:#9bcbd2}
-.builder-channel-assign select{min-width:0;width:100%;background:#071724;color:#eaf8ff;border:1px solid #396579;border-radius:6px;padding:7px;font-size:10px}
+.builder-channel-assign select,.builder-channel-assign input{min-width:0;width:100%;background:#071724;color:#eaf8ff;border:1px solid #396579;border-radius:6px;padding:8px;font-size:12px;font-variant-numeric:tabular-nums}
 .builder-drive-controls{display:none;position:absolute;z-index:9;right:14px;bottom:115px;width:min(260px,48vw);padding:8px;border:1px solid #4c877d;border-radius:12px;background:#071b22eF;box-shadow:0 10px 28px #00101877;backdrop-filter:blur(10px)}
 #builderWorldOverlay.driving .builder-drive-controls{display:block}
 .builder-drive-channel-extra{display:flex;gap:5px;margin-top:6px}
@@ -713,8 +713,8 @@ body button{min-height:42px;padding:10px 13px;touch-action:manipulation}
     <div class="builder-toolbar"><button id="builderConnectionToggle" class="primary">⌁ 接続モード開始</button><select id="builderConnectionType" aria-label="接続種類"><option value="power">ϟ 電源</option><option value="control">⌘ 信号</option></select><button id="builderSnapToggle" class="active">🧲 接合吸着 ON</button><button id="builderGridToggle" class="active">▦ グリッド ON</button><button id="builderCancelMode">解除</button></div>
     <div id="builderModeStatus" class="builder-mode-status">乗り物パーツを選び「この部品を配置」を押してから、デッキをクリックしてください。</div>
     <div id="builderSelectedInfo" class="builder-selected-info"><b>部品未選択</b><small>配置済みパーツを3D画面でクリックすると編集できます。</small></div>
-    <div class="builder-power-state"><b>BUILD GRID / 電力状態</b><span id="builderPowerState">発電機→電気板へ接続。板の上の部品は自動接続されます。</span></div>
-    <div class="builder-pilot-box"><b>VEHICLE / 乗り物試運転</b><span id="builderPilotStatus">操縦テスト停止中</span><div><button id="builderPilotStop" style="display:none">操縦テスト停止</button><button id="builderGuideBtn">操作ガイド</button></div></div>
+    <div class="builder-power-state"><b>BUILD GRID / 電力状態</b><span id="builderPowerState">電力コア→電気板を電源接続。板の上の部品へ発電電力が流れます。</span></div>
+    <div class="builder-pilot-box"><b>VEHICLE / 三人称操縦</b><span id="builderPilotStatus">操縦テスト停止中</span><div><button id="builderPilotStop" style="display:none">操縦テスト停止</button><button id="builderGuideBtn">操作ガイド</button></div></div>
     <div class="builder-channel-box">
      <b>CHANNEL CONTROL / 99チャンネル制御</b>
      <div class="builder-channel-row"><input id="builderControlChannel" type="number" min="1" max="99" value="1" aria-label="チャンネル番号"><button id="builderChannelFire" class="primary">CH 1 作動 / 停止</button><button id="builderChannelAllOff">全停止</button></div>
@@ -723,7 +723,7 @@ body button{min-height:42px;padding:10px 13px;touch-action:manipulation}
      <small>部品ごとに1〜99を割り当て。同じ番号の部品を同時作動できます。キーボードの1〜9でも直接操作できます。</small>
     </div>
     <label class="builder-creative"><input type="checkbox" id="builderCreative"> クリエイティブ建築（配置費用なし）</label>
-    <div class="builder-notes"><b>基本操作</b><p>乗り物パーツを組み合わせて機体を作ります。配置：部品選択 → 配置ボタン → 地面をクリック。選択した部品は連続配置できます。</p><p>編集：配置部品をクリック。回転・移動・拡縮・複製・撤去が可能です。Rキーで回転、Gキーで移動。</p><p>接続：接続種類（電源／信号）を選び、「接続モード開始」→1つ目→2つ目をタップ。部品同士は自動吸着して密着し、接続済みの部品群はまとめて移動・回転します。</p><p>多段配置：設置済みの床・壁・部品の面をクリックすると、その面の高さに合わせて配置できます。壁面にも取り付けできます。</p><p>電気板：発電機から電気板へ電源接続すると、板の上にある部品はすべて自動給電・操作対象になります。各部品のチャンネルを1〜99に設定し、同じ番号の部品をボタンまたはキーボード1〜9でまとめて作動。『1,2,3』の順番実行にも対応します。</p><p>操縦：操縦桿の「乗り物操縦テスト」で三人称追従カメラに切り替わります。電気板上のタイヤ・噴射器をチャンネルで起動してからW/Sで前後進、A/Dで旋回、噴射器があればSpace/Shiftで上昇・下降。iPadは左下のタッチパッドで操縦できます。</p><p>電力不足時は稼働できません。構造材・外装・配管など受動部品は電力不要です。</p></div>
+    <div class="builder-notes"><b>基本操作</b><p>乗り物パーツを組み合わせて機体を作ります。配置：部品選択 → 配置ボタン → 地面をクリック。選択した部品は連続配置できます。</p><p>編集：配置部品をクリック。回転・移動・拡縮・複製・撤去が可能です。Rキーで回転、Gキーで移動。</p><p>接続：接続種類（電源／信号）を選び、「接続モード開始」→1つ目→2つ目をタップ。部品同士は自動吸着して密着し、接続済みの部品群はまとめて移動・回転します。</p><p>多段配置：設置済みの床・壁・部品の面をクリックすると、その面の高さに合わせて配置できます。壁面にも取り付けできます。</p><p>電気：小型電力コアを電気板へ『電源』接続。発電所で発電した余剰電力が電気板全体へ流れ、板の上に置いた部品へ自動給電。部品ごとにCH 1〜99を数字で設定して作動。</p><p>操縦：土台や床パーツを選択して「三人称で操縦」。チャンネルを作動したタイヤでW/S前後進、A/D旋回。iPadは左下のパッド、右側でカメラを回せます。噴射器はSpace/Shiftで上下。</p><p>電力不足時は稼働できません。構造材・外装・配管など受動部品は電力不要です。</p></div>
    </section>
   </div>
  </div>
@@ -1104,7 +1104,7 @@ function updateWalkPad(e){const rect=walkPad.getBoundingClientRect(),cx=rect.lef
 walkPad.addEventListener('pointermove',e=>{if(walkPadPointer===e.pointerId)updateWalkPad(e);});
 function releaseWalkPad(e){if(walkPadPointer!==e.pointerId)return;walkPadPointer=null;builderTouchMove={x:0,y:0};walkKnob.style.transform='translate(-50%,-50%)';}
 walkPad.addEventListener('pointerup',releaseWalkPad);walkPad.addEventListener('pointercancel',releaseWalkPad);walkPad.addEventListener('lostpointercapture',()=>{walkPadPointer=null;builderTouchMove={x:0,y:0};walkKnob.style.transform='translate(-50%,-50%)';});
-$('builderTouchSprint').addEventListener('pointerdown',e=>{if(builderWalkMode){builderSprintTouch=true;e.currentTarget.setPointerCapture(e.pointerId);e.preventDefault();}});$('builderTouchSprint').addEventListener('pointerup',()=>builderSprintTouch=false);$('builderTouchSprint').addEventListener('pointercancel',()=>builderSprintTouch=false);
+$('builderTouchSprint').addEventListener('pointerdown',e=>{if(builderWalkMode||pilotState){builderSprintTouch=true;e.currentTarget.setPointerCapture(e.pointerId);e.preventDefault();}});$('builderTouchSprint').addEventListener('pointerup',()=>builderSprintTouch=false);$('builderTouchSprint').addEventListener('pointercancel',()=>builderSprintTouch=false);
 
 
 scene.add(new T.HemisphereLight(0x9fc9ee,0x182130,2.0));const keyLight=new T.DirectionalLight(0xc9e8ff,3.5);keyLight.position.set(9,16,8);keyLight.castShadow=true;keyLight.shadow.mapSize.set(2048,2048);keyLight.shadow.bias=-.00025;scene.add(keyLight);const fillLight=new T.DirectionalLight(0x5aa9c8,1.25);fillLight.position.set(-10,9,-6);scene.add(fillLight);const warm=new T.PointLight(0xff813c,42,27);warm.position.set(-4,5,-3);scene.add(warm);const cool=new T.PointLight(0x42d9ff,32,28);cool.position.set(5,4,4);scene.add(cool);const rimLight=new T.PointLight(0x9e75ff,16,20);rimLight.position.set(0,5,-7);scene.add(rimLight);const amberBounce=new T.PointLight(0xffb34d,14,19);amberBounce.position.set(-8,2.7,4.5);scene.add(amberBounce);const cyanBounce=new T.PointLight(0x49eaff,18,22);cyanBounce.position.set(8,3.3,-4.7);scene.add(cyanBounce);const violetBounce=new T.PointLight(0x8b72ff,8,15);violetBounce.position.set(0,2.2,7);scene.add(violetBounce);
@@ -1622,7 +1622,9 @@ function updateBatteryEnergy(c,dt){if(dt<=0)return;
 function formatCredits(value){const n=Math.max(0,Number(value)||0);if(n>=1000){const v=n/1000;return `${v.toFixed(v>=100?0:v>=10?1:2).replace(/\.?0+$/,'')}k`;}return n.toFixed(1);}
 function formatPowerLabel(value){const n=Math.max(0,Number(value)||0);if(n>=1_000_000)return `${(n/1_000_000).toFixed(2)} GW`;if(n>=1000)return `${(n/1000).toFixed(2)} MW`;return `${n.toFixed(n>=10?1:2)} kW`;}
 function formatPowerMetric(value){const n=Math.max(0,Number(value)||0);if(n>=1_000_000)return `${(n/1_000_000).toFixed(2)} <small>GW</small>`;if(n>=1000)return `${(n/1000).toFixed(2)} <small>MW</small>`;return `${n.toFixed(n>=10?1:2)} <small>kW</small>`;}
-function updateMetrics(){const c=calc();updateBatteryUI(c);updateBuilderPowerUI(c.builderPower);if(unlockMenusIfReady(c))renderShop();$('funds').innerHTML=`${formatCredits(funds)} <small>Cr</small>`;$('heat').innerHTML=formatPowerMetric(c.heatKW);$('shaft').innerHTML=formatPowerMetric(c.shaftKW);$('power').innerHTML=formatPowerMetric(c.electricKW);$('goldRate').innerHTML=`${c.goldRate.toFixed(1)} <small>Cr/s</small>`;$('goldRate').title=`電力出力ボーナス ×${(c.powerIncomeMultiplier||1).toFixed(2)}。発電出力が大きいほど生産収入が増えます（最大×5.0）。`;$('copperStock').innerHTML=`${cableMeters.toFixed(1)} <small>m</small>`;const runningIds=new Set(c.runningGoldFactoryIds),energized=new Set(c.energizedIds),thermalRun=new Set((c.thermalDevices||[]).map(x=>x.id)),shaftRun=new Set((c.shaftDevices||[]).map(x=>x.id));for(const d of placed){d.running=energized.has(d.id)||thermalRun.has(d.id)||shaftRun.has(d.id);const lamp=d.model.children.find(o=>o.userData.lamp);if(lamp)lamp.material=d.running?mats.greenGlow:mats.glass;}
+let cachedLiveState=null,lastLiveCalcAt=0;
+function getCachedLiveState(force=false){const now=performance.now();if(force||!cachedLiveState||now-lastLiveCalcAt>=220){cachedLiveState=calc();lastLiveCalcAt=now;}return cachedLiveState;}
+function updateMetrics(){const c=getCachedLiveState(true);updateBatteryUI(c);updateBuilderPowerUI(c.builderPower);if(unlockMenusIfReady(c))renderShop();$('funds').innerHTML=`${formatCredits(funds)} <small>Cr</small>`;$('heat').innerHTML=formatPowerMetric(c.heatKW);$('shaft').innerHTML=formatPowerMetric(c.shaftKW);$('power').innerHTML=formatPowerMetric(c.electricKW);$('goldRate').innerHTML=`${c.goldRate.toFixed(1)} <small>Cr/s</small>`;$('goldRate').title=`電力出力ボーナス ×${(c.powerIncomeMultiplier||1).toFixed(2)}。発電出力が大きいほど生産収入が増えます（最大×5.0）。`;$('copperStock').innerHTML=`${cableMeters.toFixed(1)} <small>m</small>`;const runningIds=new Set(c.runningGoldFactoryIds),energized=new Set(c.energizedIds),thermalRun=new Set((c.thermalDevices||[]).map(x=>x.id)),shaftRun=new Set((c.shaftDevices||[]).map(x=>x.id));for(const d of placed){d.running=energized.has(d.id)||thermalRun.has(d.id)||shaftRun.has(d.id);const lamp=d.model.children.find(o=>o.userData.lamp);if(lamp)lamp.material=d.running?mats.greenGlow:mats.glass;}
  const goals=[{title:'01 · 熱を運動に変える',desc:'熱発生器を1台以上、運動器を1台以上、熱配管と回転軸で接続する。複数系統は発電出力に合算される。',ok:!!c.thermal},{title:'02 · 回転から電気を作る',desc:'運動器 → 発電機を回転軸で接続。発電出力が kW と W で表示される。',ok:!!(c.thermal&&c.shaft)},{title:'03 · 金製造ラインを稼働',desc:'銅線を購入し、発電機から金製造機まで電力を接続する。',ok:c.complete&&c.runningGoldFactories>0}];const currentGoal=Math.min(goal,2);const nextMenu=menus.find(m=>!unlockedMenus[m.id]);let g=completed.length>=3?{title:nextMenu?`TECH TREE · ${nextMenu.name} を解放`:'TECH TREE · 5メニュー解放済み',desc:nextMenu?nextMenu.hint+`。累計収入 ${totalEarned.toFixed(0)} Cr。`: `5メニュー・25装備がすべて解放済み。ライン長・配線損失・経路内装備を比較して最適化しよう。`,ok:false}:goals[currentGoal];$('goalTitle').textContent=g.title;$('goalDesc').textContent=g.desc;$('goalBar').style.width=(completed.length/3*100)+'%';$('claimBtn').disabled=completed.length>=3||!g.ok||completed.includes(currentGoal);$('shopList').querySelectorAll('.item[data-kind]').forEach(el=>el.classList.toggle('active',el.dataset.kind===pending));}
 function renderShop(){
  const list=$('shopList');list.innerHTML='';
@@ -1734,7 +1736,7 @@ $('saveBtn').onclick=()=>saveGame(true);$('backupBtn').onclick=()=>{saveGame(fal
 let lastFrame=performance.now(),lastLiveRefresh=0,lastInspectRefresh=0;function animate(){
  requestAnimationFrame(animate);
  const now=performance.now(),dt=Math.min(.04,(now-lastFrame)/1000);lastFrame=now;
- const live=calc();movePilotAssembly(dt);updateBuilderWalk(dt);
+ const live=getCachedLiveState(false);movePilotAssembly(dt);updateBuilderWalk(dt);
  if(!paused){
    updateBatteryEnergy(live,dt);dust.rotation.y+=dt*.006;const dp=dust.geometry.attributes.position;for(let i=0;i<dp.count;i++){const y=dp.getY(i)+dt*.035;dp.setY(i,y>6.5?.35:y);}dp.needsUpdate=true;
    controls.update();
@@ -1763,13 +1765,13 @@ const BUILD_MATERIALS=[
 ];
 const BUILD_CATEGORIES=[
  {id:'vehicle',name:'乗り物パーツ',items:[
-  {id:'wheel',name:'タイヤ',form:'タイヤ',cost:35,powerW:450,weightKg:16,shape:'wheel',color:0x26333d,dimensions:{w:1.0,h:1.0,d:.52},desc:'モーター内蔵の電動車輪。電気薄型床の配電ネットワークから自動給電され、操縦桿の信号で走行します。電源不足時は停止します。'},
+  {id:'wheel',name:'タイヤ',form:'タイヤ',cost:35,powerW:450,weightKg:16,shape:'wheel',color:0x26333d,dimensions:{w:1.0,h:1.0,d:.52},desc:'モーター内蔵の電動車輪。電気板の上に置くと自動給電され、割り当てたチャンネルを作動すると回転します。電源不足時は停止します。'},
   {id:'wall-panel',name:'壁',form:'壁',cost:24,powerW:0,weightKg:20,shape:'wall',color:0x8297a5,dimensions:{w:1.6,h:1.65,d:.18},desc:'車体や機体の側面を作るパネル。回転させて向きを変えられます。'},
   {id:'floor-panel',name:'床',form:'床',cost:28,powerW:0,weightKg:22,shape:'floor',color:0x8da1ad,dimensions:{w:1.8,h:.14,d:1.35},desc:'乗り物の土台になる床パネル。複数枚を並べて広い車体を作れます。'},
   {id:'electric-floor',name:'電気板',form:'電気板',cost:58,powerW:0,weightKg:12,shape:'electricFloor',color:0x42dfd4,dimensions:{w:1.8,h:.07,d:1.35},desc:'床サイズの配電・操作プレート。発電機へ接続すると、板の上に置いた部品をすべて自動接続し、チャンネル操作で一括作動できます。'},
-  {id:'steering-stick',name:'操縦桿',form:'操縦桿',cost:65,powerW:0,weightKg:8,shape:'control',color:0x67c9c4,dimensions:{w:.62,h:.95,d:.58},desc:'操縦の中心パーツ。給電された電気薄型床があれば、モーター内蔵タイヤや噴射器へ操作信号を自動配信します。薄型床がない場合は信号接続してください。'},
-  {id:'thruster',name:'噴射器',form:'噴射器',cost:110,powerW:6000,weightKg:28,shape:'thruster',color:0x53a8c9,dimensions:{w:.9,h:.8,d:.95},desc:'向きを変えると推進方向が変わる推進ユニット。前進・上昇・浮遊に使えます。動作には発電機からの電源接続が必要です。'},
-  {id:'cockpit-seat',name:'操縦席',form:'操縦席',cost:48,powerW:0,weightKg:12,shape:'seat',color:0x637b8d,dimensions:{w:.8,h:1.0,d:.8},desc:'乗り込むための座席。操縦桿の近くに配置するとコックピットらしく仕上がります。'},
+  {id:'power-core',name:'電力コア',form:'電力コア',cost:78,powerW:0,weightKg:6,shape:'powerCore',color:0x67c9ff,dimensions:{w:.46,h:.46,d:.46},desc:'小型の電力受電コア。発電所側で実際に生成されている余剰電力を自由建築へ取り込みます。このコアを電気板へ電源接続すると、電気板全体と上に載せた部品へ電力が流れます。コア自体は電力を消費しません。'},
+  {id:'thruster',name:'噴射器',form:'噴射器',cost:110,powerW:6000,weightKg:28,shape:'thruster',color:0x53a8c9,dimensions:{w:.9,h:.8,d:.95},desc:'向きを変えると推進方向が変わる推進ユニット。前進・上昇・浮遊に使えます。電気板の上に置き、電力とチャンネルを設定して作動させます。'},
+  {id:'cockpit-seat',name:'操縦席',form:'操縦席',cost:48,powerW:0,weightKg:12,shape:'seat',color:0x637b8d,dimensions:{w:.8,h:1.0,d:.8},desc:'乗り物に取り付ける座席パーツ。'},
   {id:'frame',name:'フレーム',form:'フレーム',cost:32,powerW:0,weightKg:18,shape:'frame',color:0x8296a2,dimensions:{w:1.45,h:.28,d:1.0},desc:'床・壁・機器を支える骨組み。車体の補強やパーツの間隔調整に使います。'},
   {id:'battery',name:'バッテリー',form:'バッテリー',cost:85,powerW:0,weightKg:24,shape:'battery',color:0x4f9d91,dimensions:{w:.8,h:.65,d:.65},desc:'電源ラインの中継ポイントとして配置できる搭載パーツ。ゲーム内の蓄電量を保存する機能はまだありません。'},
   {id:'fuel-tank',name:'タンク',form:'タンク',cost:72,powerW:0,weightKg:30,shape:'tank',color:0x9aabb3,dimensions:{w:.72,h:1.1,d:.72},desc:'燃料タンクを表す搭載パーツ。現在は見た目と組み立て用のパーツとして使えます。'},
@@ -1817,18 +1819,19 @@ function advanceBuilderTutorial(expectedStep){if(!builderTutorialActive()||build
 function builderTutorialGuard(allowedStep,message='チュートリアルの黄色い案内に従って、現在の操作を完了してください。'){if(!builderTutorialActive())return false;if(builderTutorialStep!==allowedStep){toast(message);return true;}return false;}
 function restartBuilderTutorial(){builderTutorialStep=0;builderTutorialDone=false;buildPlacementAsset=null;buildMoveMode=false;buildRotateMode=false;builderTransformPointer=null;builderControls.enabled=true;buildConnectMode='';buildConnectFirst=null;updateBuilderConnectionUI();updateBuilderTutorial();saveGame(false);toast('必須操作トレーニングを最初から開始します。');}
 function buildAssetDef(id){
+ if(id==='steering-stick')id='power-core';
  const direct=BUILD_ASSET_CATALOG.find(a=>a.id===id);if(direct)return direct;
  const m=String(id||'').match(/^(structure|building|thermal|electric|mechanical|control|piping|robotics|production|decor)-(\d+)-/);
  if(!m)return null;const cat=m[1],n=Number(m[2]);
  const legacyMap={
   structure:{1:'floor-panel',2:'frame',6:'wall-panel',16:'frame'},
   building:{1:'wall-panel',2:'wall-panel',10:'wall-panel',12:'floor-panel'},
-  control:{2:'steering-stick',4:'cockpit-seat'},
+  control:{2:'power-core',4:'cockpit-seat'},
   mechanical:{1:'wheel',2:'wheel'},
   electric:{5:'battery'},thermal:{8:'fuel-tank'},
   robotics:{5:'frame',6:'cockpit-seat'},production:{},piping:{},decor:{4:'frame'}
  };
- const fallback={structure:'frame',building:'wall-panel',thermal:'fuel-tank',electric:'battery',mechanical:'wheel',control:'steering-stick',piping:'frame',robotics:'frame',production:'frame',decor:'wall-panel'};const mapped=legacyMap[cat]?.[n]||fallback[cat];return mapped?BUILD_ASSET_CATALOG.find(a=>a.id===mapped)||null:null;
+ const fallback={structure:'frame',building:'wall-panel',thermal:'fuel-tank',electric:'battery',mechanical:'wheel',control:'power-core',piping:'frame',robotics:'frame',production:'frame',decor:'wall-panel'};const mapped=legacyMap[cat]?.[n]||fallback[cat];return mapped?BUILD_ASSET_CATALOG.find(a=>a.id===mapped)||null:null;
 }
 function buildEndpointKey(ep){return ep.type==='machine'?`m:${ep.id}`:`a:${ep.id}`;}
 function buildEndpointPosition(ep){if(ep.type==='machine'){const d=builderMachineModels.find(x=>x.id===ep.id);return d?d.position.clone():null;}const a=buildAssets.find(x=>x.id===ep.id);return a?new T.Vector3(a.x,.72+(a.height||0),a.z):null;}
@@ -1881,6 +1884,12 @@ function makeBuildModel(def,x,z,rotation=0,scale=1){
   addBox(d.w*.68,.018,.095,0,.18,0,glow);
   addBox(.095,.018,d.d*.68,0,.18,0,glow);
   for(const sx of [-1,1])for(const sz of [-1,1])addBox(.12,.025,.12,sx*d.w*.36,.18,sz*d.d*.36,glow);
+ }else if(def.shape==='powerCore'){
+  addCyl(.205,.23,.10,0,.15,0,dark);
+  addCyl(.155,.155,.12,0,.245,0,alloy);
+  const orb=new T.Mesh(new T.IcosahedronGeometry(.145,2),glow);orb.position.set(0,.39,0);orb.castShadow=true;g.add(orb);
+  addRing(.205,.025,0,.39,0,glow,'y');
+  for(let i=0;i<4;i++){const a=i*Math.PI/2;addCyl(.035,.035,.13,Math.cos(a)*.19,.24,Math.sin(a)*.19,alloy);}
  }else{addBox(d.w,d.h,d.d,0,.1+d.h/2,0,alloy);}
  g.position.set(x,.24,z);g.rotation.y=rotation;g.scale.setScalar(scale||1);return g;
 }
@@ -1976,12 +1985,12 @@ function renderBuilderCatalog(){
  $('builderCatalogCount').textContent=`${rows.length} ITEMS / ${BUILD_ASSET_CATALOG.length} ASSETS`;
  list.innerHTML=rows.map(a=>`<div class="builder-asset-card ${builderCatalogSelected===a.id?'active':''}" role="button" tabindex="0" data-build-asset="${a.id}"><span class="builder-asset-swatch" style="--swatch:#${a.color.toString(16).padStart(6,'0')}"></span><span class="builder-asset-title">${a.name}</span><span class="builder-asset-meta">${a.cost.toLocaleString('ja-JP')} Cr · ${a.powerW?`${a.powerW.toLocaleString('ja-JP')} W`:'電力不要'}</span><button type="button" class="builder-fav ${builderFavorites.has(a.id)?'on':''}" data-fav-id="${a.id}" aria-label="お気に入り">${builderFavorites.has(a.id)?'★':'☆'}</button></div>`).join('')||'<div class="builder-empty">該当アイテムがありません。カテゴリや検索条件を変えてください。</div>';
  list.querySelectorAll('[data-fav-id]').forEach(btn=>btn.onclick=e=>{e.stopPropagation();toggleBuilderFavorite(btn.dataset.favId);});
- list.querySelectorAll('[data-build-asset]').forEach(card=>{const choose=()=>{if(builderTutorialGuard(0))return;if(builderTutorialActive()&&card.dataset.buildAsset!=='floor-panel'){toast('訓練では「床」を選んでください。');return;}builderCatalogSelected=card.dataset.buildAsset;rememberBuilderAsset(builderCatalogSelected);renderBuilderCatalog();updateBuilderCatalogDetail();if(builderTutorialActive())advanceBuilderTutorial(0);};card.onclick=e=>{if(e.target.closest('[data-fav-id]'))return;choose();};card.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose();}};});
+ list.querySelectorAll('[data-build-asset]').forEach(card=>{const choose=()=>{if(builderTutorialGuard(0))return;if(builderTutorialActive()&&card.dataset.buildAsset!=='floor-panel'){toast('訓練では「床」を選んでください。');return;}builderCatalogSelected=card.dataset.buildAsset;if(['power-core','electric-floor'].includes(builderCatalogSelected)&&$('builderConnectionType'))$('builderConnectionType').value='power';rememberBuilderAsset(builderCatalogSelected);renderBuilderCatalog();updateBuilderCatalogDetail();if(builderTutorialActive())advanceBuilderTutorial(0);};card.onclick=e=>{if(e.target.closest('[data-fav-id]'))return;choose();};card.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose();}};});
  renderBuilderInventoryTabs();
 }
 function setBuilderPlacementPreview(id){const def=buildAssetDef(id);if(!def)return;buildPlacementAsset=id;buildMoveMode=false;buildRotateMode=false;builderTransformPointer=null;builderControls.enabled=!builderWalkMode;buildConnectMode='';buildConnectFirst=null;updateBuilderConnectionUI();if(builderPreview){builderScene.remove(builderPreview);builderPreview.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material){const mats=Array.isArray(o.material)?o.material:[o.material];mats.forEach(m=>m.dispose());}});builderPreview=null;}builderPreview=makeBuildModel(def,0,0,0,1);builderPreview.traverse(o=>{if(o.isMesh){o.castShadow=false;o.receiveShadow=false;const mats=Array.isArray(o.material)?o.material:[o.material];o.material=Array.isArray(o.material)?mats.map(m=>{const c=m.clone();c.transparent=true;c.opacity=.42;c.depthWrite=false;return c;}):mats[0].clone();if(!Array.isArray(o.material)){o.material.transparent=true;o.material.opacity=.42;o.material.depthWrite=false;}}});builderPreview.position.set(0,.24,0);builderPreview.visible=true;builderPreview.userData.isPreview=true;builderScene.add(builderPreview);$('builderModeStatus').textContent=`設置プレビュー：${def.name}。青いゴーストを確認して、地面をクリックしてください。`;updateBuilderTutorial();}
 function snapBuilderPoint(p){if(!p)return p;let x=p.x,z=p.z;if(builderGridEnabled){x=Math.round(x*2)/2;z=Math.round(z*2)/2;}if(builderSnapEnabled&&buildAssets.length){let near=null,dist=1.65;for(const a of buildAssets){if(buildMoveMode&&a.id===buildSelectedId)continue;const d=Math.hypot(x-a.x,z-a.z);if(d<dist){dist=d;near=a;}}if(near){const dx=x-near.x,dz=z-near.z;if(Math.abs(dx)>Math.abs(dz)){x=near.x+(dx>=0?1:-1);z=near.z;}else{x=near.x;z=near.z+(dz>=0?1:-1);}if(builderGridEnabled){x=Math.round(x*2)/2;z=Math.round(z*2)/2;}}}return{x,z};}
-function updateBuilderQuickbar(){const host=$('builderQuickbar');if(!host)return;const defaults=['wheel','wall-panel','floor-panel','electric-floor','steering-stick','thruster'];const picks=[...builderRecent,...defaults].filter((id,i,a)=>a.indexOf(id)===i&&buildAssetDef(id)).slice(0,6);while(picks.length<6){const a=BUILD_ASSET_CATALOG[picks.length];if(a)picks.push(a.id);else break;}host.innerHTML=picks.map((id,i)=>{const a=buildAssetDef(id);return `<button type="button" class="builder-quick-slot ${builderCatalogSelected===id?'active':''}" data-quick-asset="${id}" title="${a.name}"><span class="builder-quick-icon" style="background:#${a.color.toString(16).padStart(6,'0')}"></span><span>${a.form.slice(0,5)}</span><small>${i+1}</small></button>`;}).join('');host.querySelectorAll('[data-quick-asset]').forEach(btn=>btn.onclick=()=>{if(builderTutorialActive()){toast('チュートリアル完了後にクイック建築を使えます。');return;}builderCatalogSelected=btn.dataset.quickAsset;builderCategory=buildAssetDef(builderCatalogSelected).category;$('builderCategory').value=builderCategory;builderSearch='';$('builderSearch').value='';builderInventoryFilter='all';renderBuilderCategoryChips();renderBuilderCatalog();updateBuilderCatalogDetail();if(builderWalkMode)exitBuilderWalk();$('builderPanel').classList.add('open');});}
+function updateBuilderQuickbar(){const host=$('builderQuickbar');if(!host)return;const defaults=['wheel','wall-panel','floor-panel','electric-floor','power-core','thruster'];const picks=[...builderRecent,...defaults].filter((id,i,a)=>a.indexOf(id)===i&&buildAssetDef(id)).slice(0,6);while(picks.length<6){const a=BUILD_ASSET_CATALOG[picks.length];if(a)picks.push(a.id);else break;}host.innerHTML=picks.map((id,i)=>{const a=buildAssetDef(id);return `<button type="button" class="builder-quick-slot ${builderCatalogSelected===id?'active':''}" data-quick-asset="${id}" title="${a.name}"><span class="builder-quick-icon" style="background:#${a.color.toString(16).padStart(6,'0')}"></span><span>${a.form.slice(0,5)}</span><small>${i+1}</small></button>`;}).join('');host.querySelectorAll('[data-quick-asset]').forEach(btn=>btn.onclick=()=>{if(builderTutorialActive()){toast('チュートリアル完了後にクイック建築を使えます。');return;}builderCatalogSelected=btn.dataset.quickAsset;if(['power-core','electric-floor'].includes(builderCatalogSelected)&&$('builderConnectionType'))$('builderConnectionType').value='power';builderCategory=buildAssetDef(builderCatalogSelected).category;$('builderCategory').value=builderCategory;builderSearch='';$('builderSearch').value='';builderInventoryFilter='all';renderBuilderCategoryChips();renderBuilderCatalog();updateBuilderCatalogDetail();if(builderWalkMode)exitBuilderWalk();$('builderPanel').classList.add('open');});}
 function activateBuilderQuickSlot(index){const slots=$('builderQuickbar')?.querySelectorAll('[data-quick-asset]');if(slots&&slots[index])slots[index].click();}
 
 function updateBuilderCatalogDetail(){
@@ -1995,9 +2004,14 @@ function updateBuilderSelection(){
  if(!a){el.innerHTML='<b>部品未選択</b><small>配置済みパーツをタップして選択。回転・移動はボタンを押してから3D画面をスワイプ／ドラッグします。</small>';return;}
  const d=buildAssetDef(a.assetId);const powered=lastBuilderPowerStats?.poweredIds?.has(a.id)||false;const connected=lastBuilderPowerStats?.connectedIds?.has(a.id)||false;
  const tut=builderTutorialActive(),ts=builderTutorialStep;
- const stateText=a.assetId==='electric-floor'?(powered?'配電ハブ・給電中':'配電ハブ・発電機への接続待ち'):(a.powerW>0?(connected?(powered?'電源接続・稼働中':'電力待ち'):'電源未接続'):(d?.id==='wheel'?'モーター内蔵・電源待ち':'受動部品'));
- el.innerHTML=`<b>${a.name}</b><small>ID B-${String(a.id).padStart(3,'0')} · ${a.weightKg} kg · ${a.powerW.toLocaleString('ja-JP')} W · サイズ ${Math.round((a.scale||1)*100)}%</small><small>${stateText}</small><div class="builder-channel-assign"><label for="builderAssetChannel">操作チャンネル</label><select id="builderAssetChannel">${Array.from({length:99},(_,i)=>`<option value="${i+1}" ${(+a.channel||1)===i+1?'selected':''}>CH ${String(i+1).padStart(2,'0')}</option>`).join('')}</select></div><div class="builder-edit-actions"><button id="builderRotateBtn" class="${buildRotateMode?'active':''}" ${tut&&ts!==3?'disabled':''}>↻ ${buildRotateMode?'回転中':'回転スワイプ'}</button><button id="builderMoveBtn" class="${buildMoveMode?'active':''}" ${tut&&ts!==4?'disabled':''}>${buildMoveMode?'移動中':'移動ドラッグ'}</button><button id="builderScaleDownBtn" ${tut?'disabled':''}>縮小</button><button id="builderScaleUpBtn" ${tut?'disabled':''}>拡大</button><button id="builderDuplicateBtn" ${tut&&ts!==5?'disabled':''}>複製</button><button id="builderDeleteBtn" class="danger" ${tut?'disabled':''}>撤去</button></div><small>回転：左右スワイプ · 移動：パーツをつかんでドラッグ</small>${d?.id==='steering-stick'&&!tut?'<button id="builderPilotBtn" class="pilot-action">▶ 乗り物操縦テスト</button>':''}`;
- $('builderAssetChannel').onchange=e=>{a.channel=Math.max(1,Math.min(99,Math.floor(+e.target.value||1)));saveGame(false);toast(`${a.name}をCH ${a.channel}に割り当てました。`);};$('builderRotateBtn').onclick=()=>setBuilderTransformMode('rotate',a.id);$('builderMoveBtn').onclick=()=>setBuilderTransformMode('move',a.id);$('builderScaleDownBtn').onclick=()=>{if(builderTutorialActive())return;scaleBuildAsset(a.id,-.1);};$('builderScaleUpBtn').onclick=()=>{if(builderTutorialActive())return;scaleBuildAsset(a.id,.1);};$('builderDuplicateBtn').onclick=()=>{if(builderTutorialGuard(5))return;if(!buildCreativeMode&&funds<a.cost){toast('複製費用が不足しています。');return;}if(!buildCreativeMode)funds-=a.cost;const copy=addBuildAsset(a.assetId,a.x+2.2,a.z+.25,a.rotation,null,true,a.scale||1,a.height||0);if(copy){buildSelectedId=copy.id;updateBuilderSelection();renderBuilderStats();updateMetrics();saveGame(false);toast(`${a.name}を複製しました。`);if(builderTutorialActive())advanceBuilderTutorial(5);}};$('builderDeleteBtn').onclick=()=>{if(builderTutorialActive())return;removeBuildAsset(a.id,true);};
+ const stateText=a.assetId==='power-core'?(powered?'発電所の余剰電力を受電中':connected?'発電・余剰電力不足':'発電所の発電待ち'):(a.assetId==='electric-floor'?(powered?'電気板・給電中':connected?'発電電力不足':'電力コアへの接続待ち'):(a.powerW>0?(connected?(powered?'電源接続・稼働可能':'電力待ち'):'電源未接続'):(d?.id==='wheel'?'電動部品':'受動部品')));
+ // updateBuilderSelection() is called from the live 250 ms refresh. Preserve a
+ // focused channel editor so typing/selecting is not interrupted mid-entry.
+ if(el.dataset.assetId===String(a.id)){const focused=el.querySelector('#builderAssetChannel');if(focused&&document.activeElement===focused){const st=el.querySelector('[data-builder-state]');if(st)st.textContent=stateText;return;}}
+ const controlIds=computeBuildControlComponent(a.id);const driveCandidate=controlIds.some(id=>{const x=buildAssets.find(v=>v.id===id);return x&&['wheel','thruster'].includes(buildAssetDef(x.assetId)?.id);});
+ el.dataset.assetId=String(a.id);
+ el.innerHTML=`<b>${a.name}</b><small>ID B-${String(a.id).padStart(3,'0')} · ${a.weightKg} kg · ${a.powerW.toLocaleString('ja-JP')} W · サイズ ${Math.round((a.scale||1)*100)}%</small><small data-builder-state>${stateText}</small><div class="builder-channel-assign"><label for="builderAssetChannel">操作CH（1〜99）</label><input id="builderAssetChannel" type="number" inputmode="numeric" min="1" max="99" step="1" value="${Math.max(1,Math.min(99,Math.floor(+a.channel||1)))}" aria-label="この部品の操作チャンネル"></div><div class="builder-edit-actions"><button id="builderRotateBtn" class="${buildRotateMode?'active':''}" ${tut&&ts!==3?'disabled':''}>↻ ${buildRotateMode?'回転中':'回転スワイプ'}</button><button id="builderMoveBtn" class="${buildMoveMode?'active':''}" ${tut&&ts!==4?'disabled':''}>${buildMoveMode?'移動中':'移動ドラッグ'}</button><button id="builderScaleDownBtn" ${tut?'disabled':''}>縮小</button><button id="builderScaleUpBtn" ${tut?'disabled':''}>拡大</button><button id="builderDuplicateBtn" ${tut&&ts!==5?'disabled':''}>複製</button><button id="builderDeleteBtn" class="danger" ${tut?'disabled':''}>撤去</button></div><small>回転：左右スワイプ · 移動：パーツをつかんでドラッグ</small>${driveCandidate?'<button id="builderPilotBtn" class="pilot-action">▶ 三人称で操縦</button>':''}`;
+ const channelInput=$('builderAssetChannel');channelInput.oninput=e=>{const v=Math.floor(Number(e.target.value));if(Number.isFinite(v)&&v>=1&&v<=99){a.channel=v;refreshChannelButtons();}};channelInput.onchange=e=>{a.channel=Math.max(1,Math.min(99,Math.floor(Number(e.target.value)||1)));e.target.value=a.channel;saveGame(false);refreshChannelButtons();toast(`${a.name}をCH ${a.channel}に設定しました。`);};$('builderRotateBtn').onclick=()=>setBuilderTransformMode('rotate',a.id);$('builderMoveBtn').onclick=()=>setBuilderTransformMode('move',a.id);$('builderScaleDownBtn').onclick=()=>{if(builderTutorialActive())return;scaleBuildAsset(a.id,-.1);};$('builderScaleUpBtn').onclick=()=>{if(builderTutorialActive())return;scaleBuildAsset(a.id,.1);};$('builderDuplicateBtn').onclick=()=>{if(builderTutorialGuard(5))return;if(!buildCreativeMode&&funds<a.cost){toast('複製費用が不足しています。');return;}if(!buildCreativeMode)funds-=a.cost;const copy=addBuildAsset(a.assetId,a.x+2.2,a.z+.25,a.rotation,null,true,a.scale||1,a.height||0);if(copy){buildSelectedId=copy.id;updateBuilderSelection();renderBuilderStats();updateMetrics();saveGame(false);toast(`${a.name}を複製しました。`);if(builderTutorialActive())advanceBuilderTutorial(5);}};$('builderDeleteBtn').onclick=()=>{if(builderTutorialActive())return;removeBuildAsset(a.id,true);};
  const pilot=$('builderPilotBtn');if(pilot)pilot.onclick=()=>startPilotTest(a.id);
 }
 function setBuilderTransformMode(mode,id){
@@ -2013,11 +2027,15 @@ function setBuilderTransformMode(mode,id){
 function refreshBuildAssetLinks(id){for(const l of buildLinks)if((l.aType==='asset'&&l.aId===id)||(l.bType==='asset'&&l.bId===id))refreshBuildLinkLine(l);}
 function rotateBuildAsset(id,angle=Math.PI/4){if(builderTutorialGuard(3))return;const a=buildAssets.find(x=>x.id===id);if(!a)return;a.rotation=(a.rotation+angle)%(Math.PI*2);a.model.rotation.y=a.rotation;refreshBuildAssetLinks(id);updateBuilderSelection();saveGame(false);if(builderTutorialActive())advanceBuilderTutorial(3);}
 function scaleBuildAsset(id,delta){const a=buildAssets.find(x=>x.id===id);if(!a)return;a.scale=Math.max(.4,Math.min(3,(a.scale||1)+delta));a.model.scale.setScalar(a.scale);updateBuilderSelection();buildLinks.forEach(l=>{if((l.aType==='asset'&&l.aId===id)||(l.bType==='asset'&&l.bId===id))refreshBuildLinkLine(l);});saveGame(false);toast(`${a.name} · サイズ ${(a.scale*100).toFixed(0)}%`);}
-function getBuildPoweredGraph(sourceDevices){
+function getBuildPoweredGraph(sourceDevices,electricKW=0){
  const adj=new Map();const key=(type,id)=>type==='machine'?`m:${id}`:`a:${id}`;
  for(const l of buildLinks.filter(x=>x.type==='power')){const a=key(l.aType,l.aId),b=key(l.bType,l.bId);if(!adj.has(a))adj.set(a,[]);if(!adj.has(b))adj.set(b,[]);adj.get(a).push({key:b,link:l});adj.get(b).push({key:a,link:l});}
  const connectedIds=new Set(),pathR=new Map(),queue=[];
  for(const g of sourceDevices||[]){const k=key('machine',g.id);queue.push({key:k,resistance:0});pathR.set(k,0);}
+ // The compact power core imports only electricity that the main factory is
+ // actually generating. It becomes a source node; the player only needs to
+ // connect this core to an electric plate in the workshop.
+ if((Number(electricKW)||0)>0){for(const core of buildAssets.filter(a=>a.assetId==='power-core')){const k=key('asset',core.id);if(!pathR.has(k)){queue.push({key:k,resistance:0});pathR.set(k,0);}connectedIds.add(core.id);}}
  for(let qi=0;qi<queue.length;qi++){const cur=queue[qi];for(const edge of adj.get(cur.key)||[]){const R=Math.max(.0001,COPPER_RESISTIVITY*(Math.max(.1,edge.link.length)*2)/COPPER_AREA_MM2),nr=cur.resistance+R;if(!pathR.has(edge.key)||nr<pathR.get(edge.key)){pathR.set(edge.key,nr);queue.push({key:edge.key,resistance:nr});if(edge.key.startsWith('a:'))connectedIds.add(Number(edge.key.slice(2)));}}}
  // Energized electric plates form a shared bus. Neighboring tiles touch automatically.
  const allPlates=buildAssets.filter(a=>a.assetId==='electric-floor');builderScene.updateMatrixWorld(true);const bounds=new Map(buildAssets.map(a=>[a.id,a.model?new T.Box3().setFromObject(a.model):null]));const plateIds=new Set(allPlates.filter(a=>connectedIds.has(a.id)).map(a=>a.id));
@@ -2032,25 +2050,30 @@ function getBuildPoweredGraph(sourceDevices){
 }
 let lastBuilderPowerStats={connectedIds:new Set(),poweredIds:new Set(),requestedW:0,usedW:0,lossW:0,availableW:0,unpoweredIds:new Set()};
 function computeBuilderPowerStats(sourceDevices,electricKW,sourcePowerW,batteryDischargeW=0,flywheelDischargeW=0){
- const graph=getBuildPoweredGraph(sourceDevices||[]);const connected=buildAssets.filter(a=>graph.connectedIds.has(a.id));const demand=connected.filter(a=>a.powerW>0).sort((a,b)=>a.powerW-b.powerW);
+ const graph=getBuildPoweredGraph(sourceDevices||[],electricKW||0);const connected=buildAssets.filter(a=>graph.connectedIds.has(a.id));const demand=connected.filter(a=>a.powerW>0).sort((a,b)=>a.powerW-b.powerW);
  let available=Math.max(0,(electricKW||0)*1000+(batteryDischargeW||0)+(flywheelDischargeW||0)-(sourcePowerW||0));let used=0,loss=0;const poweredIds=new Set();
- for(const a of connected.filter(x=>x.powerW===0))poweredIds.add(a.id);
- for(const a of demand){const extra=pilotState?.controllerId===a.id?2000:0;const draw=a.powerW+extra;const r=graph.pathR.get(`a:${a.id}`)||0;const cableLoss=(draw/POWER_BUS_VOLTAGE)**2*r;const need=draw+cableLoss;if(need<=available+1e-6){available-=need;used+=draw;loss+=cableLoss;poweredIds.add(a.id);}}
- const requestedW=demand.reduce((sum,a)=>sum+a.powerW+(pilotState?.controllerId===a.id?2000:0),0);
+ if(available>1e-6)for(const a of connected.filter(x=>x.powerW===0))poweredIds.add(a.id);
+ for(const a of demand){const draw=a.powerW;const r=graph.pathR.get(`a:${a.id}`)||0;const cableLoss=(draw/POWER_BUS_VOLTAGE)**2*r;const need=draw+cableLoss;if(need<=available+1e-6){available-=need;used+=draw;loss+=cableLoss;poweredIds.add(a.id);}}
+ const requestedW=demand.reduce((sum,a)=>sum+a.powerW,0);
  const stats={connectedIds:graph.connectedIds,poweredIds,requestedW,usedW:used,lossW:loss,availableW:available,unpoweredIds:new Set(demand.filter(a=>!poweredIds.has(a.id)).map(a=>a.id)),connectedCount:connected.length,poweredCount:poweredIds.size,connectedConsumerCount:demand.length,poweredConsumerCount:demand.filter(a=>poweredIds.has(a.id)).length};
  lastBuilderPowerStats=stats;return stats;
 }
-function computeBuildControlComponent(controllerId){
- const adj=new Map();for(const l of buildLinks.filter(x=>x.type==='control'&&x.aType==='asset'&&x.bType==='asset')){if(!adj.has(l.aId))adj.set(l.aId,[]);if(!adj.has(l.bId))adj.set(l.bId,[]);adj.get(l.aId).push(l.bId);adj.get(l.bId).push(l.aId);}
- const ids=new Set([controllerId]),queue=[controllerId];for(let i=0;i<queue.length;i++)for(const n of adj.get(queue[i])||[])if(!ids.has(n)){ids.add(n);queue.push(n);}
- const poweredBus=buildAssets.some(a=>a.assetId==='electric-floor'&&lastBuilderPowerStats?.poweredIds?.has(a.id));
- if(poweredBus){
-  const poweredActuators=buildAssets.filter(a=>['wheel','thruster'].includes(buildAssetDef(a.assetId)?.id)&&lastBuilderPowerStats?.poweredIds?.has(a.id));
-  poweredActuators.forEach(a=>ids.add(a.id));
-  const anchors=[...poweredActuators,{id:controllerId,...(buildAssets.find(a=>a.id===controllerId)||{})}].filter(a=>Number.isFinite(a.x)&&Number.isFinite(a.z));
-  for(const a of buildAssets)if(lastBuilderPowerStats?.poweredIds?.has(a.id)||anchors.some(p=>Math.hypot(a.x-p.x,a.z-p.z)<4.6))ids.add(a.id);
+function computeBuildControlComponent(rootId){
+ const root=buildAssets.find(a=>a.id===rootId);if(!root)return[];
+ const adj=new Map();
+ for(const l of buildLinks.filter(x=>x.aType==='asset'&&x.bType==='asset')){if(!adj.has(l.aId))adj.set(l.aId,[]);if(!adj.has(l.bId))adj.set(l.bId,[]);adj.get(l.aId).push(l.bId);adj.get(l.bId).push(l.aId);}
+ const ids=new Set([rootId]),queue=[rootId];
+ for(let i=0;i<queue.length;i++)for(const n of adj.get(queue[i])||[])if(!ids.has(n)){ids.add(n);queue.push(n);}
+ // No steering stick is needed: a selected chassis/base controls the nearby
+ // vehicle assembly. Powered actuators on the connected electric-board bus are
+ // included automatically, with a local-radius guard to avoid moving other builds.
+ const radius=9.5;
+ for(const a of buildAssets){if(Math.hypot(a.x-root.x,a.z-root.z)<=radius)ids.add(a.id);}
+ const localActuators=buildAssets.filter(a=>ids.has(a.id)&&['wheel','thruster'].includes(buildAssetDef(a.assetId)?.id));
+ if(localActuators.length){
+  for(const a of buildAssets)if(localActuators.some(m=>Math.hypot(a.x-m.x,a.z-m.z)<=5.2))ids.add(a.id);
  }
- return [...ids].filter(id=>buildAssets.some(a=>a.id===id&&id!==controllerId));
+ return [...ids];
 }
 function updateBuildChannelVisual(asset){
  if(!asset?.model)return;asset.model.userData.channelActive=!!asset.active;
@@ -2071,15 +2094,18 @@ function activateBuildChannel(channel){
 function stopAllBuildChannels(){buildAssets.forEach(a=>{a.active=false;updateBuildChannelVisual(a);});saveGame(false);refreshChannelButtons();toast('すべてのチャンネルを停止しました。');}
 let buildSequenceTimer=null;
 function runBuildChannelSequence(raw){const list=String(raw||'').split(/[，,\s]+/).map(x=>Math.floor(Number(x))).filter(x=>Number.isFinite(x)&&x>=1&&x<=99).slice(0,99);if(!list.length){toast('1〜99のチャンネル番号を入力してください。');return;}if(buildSequenceTimer)clearTimeout(buildSequenceTimer);let i=0;const step=()=>{if(i>=list.length){buildSequenceTimer=null;toast(`シーケンス完了：${list.join(' → ')}`);return;}activateBuildChannel(list[i++]);buildSequenceTimer=setTimeout(step,480);};step();}
-function startPilotTest(controllerId){
- const controller=buildAssets.find(a=>a.id===controllerId),def=controller&&buildAssetDef(controller.assetId);if(!controller||!def||def.id!=='steering-stick'){toast('操縦テストには操縦桿を選択してください。');return;}
- updateMetrics();const assetIds=computeBuildControlComponent(controllerId);if(!assetIds.length||!assetIds.some(id=>['wheel','thruster'].includes(buildAssetDef(buildAssets.find(a=>a.id===id)?.assetId)?.id))){toast('操縦するタイヤ・噴射器を電気板に載せるか、操縦桿と信号接続してください。');return;}
- const poweredWheel=assetIds.some(id=>buildAssetDef(buildAssets.find(a=>a.id===id)?.assetId)?.id==='wheel'&&lastBuilderPowerStats?.poweredIds?.has(id));const poweredThruster=assetIds.some(id=>buildAssetDef(buildAssets.find(a=>a.id===id)?.assetId)?.id==='thruster'&&lastBuilderPowerStats?.poweredIds?.has(id));if(!poweredWheel&&!poweredThruster){toast('モーターや噴射器に電力がありません。発電機から電気板へ給電してください。');return;}
- pilotState={controllerId,assetIds,heading:controller.rotation||0};builderYaw=pilotState.heading;builderPitch=.12;builderTouchMove={x:0,y:0};builderSprintTouch=false;builderWalkMode=false;builderPlayer.visible=false;builderControls.enabled=false;
- $('builderModeStatus').textContent='三人称操縦中：W/S 前後・A/D 旋回。タッチは左下パッド、CH 1〜9ボタンまたは番号入力で各装置を作動。';$('builderPilotStatus').textContent=`三人称操縦中 · ${assetIds.length} 個の連動パーツ`;
- $('builderPilotStop').style.display='inline-flex';$('builderTouchSprint').textContent='降下';$('builderWalkToggle').textContent='🚗 操作終了';$('builderPanel').classList.remove('open');document.body.classList.add('builder-walking');builderWorldOverlay.classList.add('walking','driving');
- refreshChannelButtons();const cx=controller.x,cz=controller.z;builderCamera.position.set(cx+Math.sin(builderYaw)*9,5.2,cz+Math.cos(builderYaw)*9);builderCamera.lookAt(cx,1.5,cz);
- toast('三人称操縦開始。電気板に載せた部品をCHボタンで起動し、スティックで操縦できます。');
+function startPilotTest(rootId){
+ const root=buildAssets.find(a=>a.id===rootId);if(!root){toast('乗り物の土台や部品を先に選択してください。');return;}
+ updateMetrics();const assetIds=computeBuildControlComponent(rootId),members=buildAssets.filter(a=>assetIds.includes(a.id));
+ const hasActuator=members.some(a=>['wheel','thruster'].includes(buildAssetDef(a.assetId)?.id));
+ if(!hasActuator){toast('選択した部品の近くにタイヤまたは噴射器を配置してください。');return;}
+ const poweredActuator=members.some(a=>['wheel','thruster'].includes(buildAssetDef(a.assetId)?.id)&&lastBuilderPowerStats?.poweredIds?.has(a.id));
+ if(!poweredActuator){toast('電力がありません。電力コアを電気板へ接続し、発電所で発電してください。');return;}
+ pilotState={controllerId:rootId,assetIds,heading:root.rotation||0};builderYaw=pilotState.heading;builderPitch=.12;builderTouchMove={x:0,y:0};builderSprintTouch=false;builderWalkMode=false;builderPlayer.visible=false;builderControls.enabled=false;
+ $('builderModeStatus').textContent='三人称操縦中：左スティックで前後・旋回。CHを作動した部品が動力になります。';$('builderPilotStatus').textContent=`三人称操縦中 · ${members.length} 個の近接部品`;
+ $('builderPilotStop').style.display='inline-flex';$('builderTouchSprint').textContent='加速';$('builderWalkToggle').textContent='🚗 操作終了';$('builderPanel').classList.remove('open');document.body.classList.add('builder-walking');builderWorldOverlay.classList.add('walking','driving');
+ refreshChannelButtons();const cx=root.x,cz=root.z;builderCamera.position.set(cx+Math.sin(builderYaw)*9,5.2,cz+Math.cos(builderYaw)*9);builderCamera.lookAt(cx,1.5,cz);
+ toast('三人称操縦開始。CHを作動させたタイヤで走行します。画面左下のパッドで移動できます。');
 }
 function stopPilotTest(){const wasDriving=!!pilotState;pilotState=null;pilotKeys.clear();builderTouchMove={x:0,y:0};builderSprintTouch=false;const p=$('builderPilotStatus');if(p)p.textContent='操縦テスト停止中';const b=$('builderPilotStop');if(b)b.style.display='none';builderWorldOverlay?.classList.remove('driving');if(wasDriving){builderWorldOverlay.classList.remove('walking');document.body.classList.remove('builder-walking');if(builderWorldOpen)$('builderPanel').classList.add('open');}if($('builderWalkToggle'))$('builderWalkToggle').textContent='🚶 三人称モード';if($('builderTouchSprint'))$('builderTouchSprint').textContent='走る';if($('builderTouchKnob'))$('builderTouchKnob').style.transform='translate(-50%,-50%)';}
 
@@ -2109,7 +2135,7 @@ function toggleBuilderConnectionMode(){
  if(builderTutorialActive()&&type!=='control'){toast('訓練では接続種類を「信号」にしてください。');$('builderConnectionType').value='control';return;}
  buildPlacementAsset=null;buildMoveMode=false;buildRotateMode=false;builderTransformPointer=null;builderControls.enabled=!builderWalkMode;
  buildConnectMode=type;buildConnectFirst=null;updateBuilderConnectionUI();
- $('builderModeStatus').textContent=type==='power'?'電源接続：接続元と接続先を順番にタップ。発電機 → 電気薄型床がおすすめです。':'信号接続：操縦桿と、動かしたいタイヤ・噴射器などを順番にタップ。';
+ $('builderModeStatus').textContent=type==='power'?'電源接続：接続元と接続先を順番にタップ。電力コア → 電気板を接続してください。コアは発電所の余剰電力を受け取ります。':'信号接続：必要な部品同士を順番にタップ。';
  updateBuilderTutorial();updateBuilderSelection();
 }
 function builderEndpointFromPointer(){
@@ -2123,7 +2149,7 @@ function handleBuildPointer(e){
  if(builderTutorialActive()&&builderTutorialStep===4&&!buildMoveMode){toast('先に選択パーツの「移動」を押してください。');return true;}
  if(builderTutorialActive()&&builderTutorialStep===6&&!buildConnectMode){toast('先に「接続モード開始」を押してください。');return true;}
  if(!buildPlacementAsset&&!buildMoveMode&&!buildConnectMode){
-  const hits=ray.intersectObjects(buildAssets.map(a=>a.model),true);if(hits.length){let o=hits[0].object;while(o.parent&&!buildAssets.some(a=>a.model===o))o=o.parent;const a=buildAssets.find(x=>x.model===o);if(a){buildSelectedId=a.id;updateBuilderSelection();if(builderTutorialActive()&&builderTutorialStep===2)advanceBuilderTutorial(2);return true;}}
+  const hits=ray.intersectObjects(buildAssets.map(a=>a.model),true);if(hits.length){let o=hits[0].object;while(o.parent&&!buildAssets.some(a=>a.model===o))o=o.parent;const a=buildAssets.find(x=>x.model===o);if(a){buildSelectedId=a.id;if(['power-core','electric-floor'].includes(a.assetId)&&$('builderConnectionType'))$('builderConnectionType').value='power';updateBuilderSelection();if(builderTutorialActive()&&builderTutorialStep===2)advanceBuilderTutorial(2);return true;}}
   return false;
  }
  if(buildConnectMode){const ep=builderEndpointFromPointer();if(!ep){toast('接続する設備または建築パーツを選択してください。');return true;}
@@ -2140,15 +2166,16 @@ function handleBuildPointer(e){
 }
 
 function movePilotAssembly(dt){
- if(!pilotState||dt<=0)return;const controller=buildAssets.find(a=>a.id===pilotState.controllerId);if(!controller){stopPilotTest();return;}
- const members=buildAssets.filter(a=>pilotState.assetIds.includes(a.id)),parts=[controller,...members];
- const hasWheels=members.some(a=>buildAssetDef(a.assetId)?.id==='wheel'&&lastBuilderPowerStats?.poweredIds?.has(a.id)&&a.active),thrusters=members.filter(a=>buildAssetDef(a.assetId)?.id==='thruster'&&lastBuilderPowerStats?.poweredIds?.has(a.id)&&a.active).length;
+ if(!pilotState||dt<=0)return;
+ const parts=buildAssets.filter(a=>pilotState.assetIds.includes(a.id));if(!parts.length){stopPilotTest();return;}
+ const hasWheels=parts.some(a=>buildAssetDef(a.assetId)?.id==='wheel'&&lastBuilderPowerStats?.poweredIds?.has(a.id)&&a.active);
+ const thrusters=parts.filter(a=>buildAssetDef(a.assetId)?.id==='thruster'&&lastBuilderPowerStats?.poweredIds?.has(a.id)&&a.active).length;
  const turn=((pilotKeys.has('a')||pilotKeys.has('arrowleft'))?1:0)-((pilotKeys.has('d')||pilotKeys.has('arrowright'))?1:0)+builderTouchMove.x;
  const forward=(pilotKeys.has('w')||pilotKeys.has('arrowup')?1:0)-(pilotKeys.has('s')||pilotKeys.has('arrowdown')?1:0)-builderTouchMove.y;
  const headingDelta=(hasWheels||thrusters>0)?turn*1.35*dt:0;pilotState.heading=(pilotState.heading||0)+headingDelta;
- const speed=(hasWheels?3.4:0)+(thrusters?2.6:0),distance=forward*speed*dt;
+ const speed=(hasWheels?(builderSprintTouch?5.0:3.4):0)+(thrusters?2.6:0),distance=forward*speed*dt;
  const dx=-Math.sin(pilotState.heading)*distance,dz=-Math.cos(pilotState.heading)*distance;
- const canLift=thrusters>0,vertical=canLift?((pilotKeys.has('space')?1:0)-(pilotKeys.has('shift')||builderSprintTouch?1:0))*2.2*dt:0;
+ const canLift=thrusters>0,vertical=canLift?((pilotKeys.has('space')?1:0)-(pilotKeys.has('shift')?1:0))*2.2*dt:0;
  if(turn||forward||vertical){
   const cx=parts.reduce((v,a)=>v+a.x,0)/parts.length,cz=parts.reduce((v,a)=>v+a.z,0)/parts.length;
   const bounds=getWorkbenchBounds();if(parts.every(a=>Math.abs(a.x+dx)<=bounds.x-.35&&Math.abs(a.z+dz)<=bounds.z-.35)){
@@ -2159,10 +2186,9 @@ function movePilotAssembly(dt){
  const cx=parts.reduce((v,a)=>v+a.x,0)/parts.length,cy=parts.reduce((v,a)=>v+(a.height||0),0)/parts.length,cz=parts.reduce((v,a)=>v+a.z,0)/parts.length;
  const target=new T.Vector3(cx,1.05+cy,cz),distanceCam=8.8,offset=new T.Vector3(Math.sin(pilotState.heading)*distanceCam,3.3+builderPitch*4,Math.cos(pilotState.heading)*distanceCam);
  builderCamera.position.lerp(target.clone().add(offset),1-Math.exp(-dt*5.5));builderCamera.lookAt(target);
- $('builderPilotStatus').textContent=`三人称操縦中 · ${hasWheels?'モーターON':'モーター待機'} · 噴射器 ${thrusters} 基`;
+ $('builderPilotStatus').textContent=`三人称操縦中 · ${hasWheels?'タイヤ駆動ON':'タイヤ待機'} · 噴射器 ${thrusters} 基`;
 }
-
-function openBuilder(){const panel=$('builderPanel');panel.classList.add('open');document.body.classList.add('builder-world-open');builderWorldOverlay.classList.add('open');builderWorldOpen=true;syncBuilderMachineModels();resizeBuilderWorld();builderControls.enabled=true;builderPlayer.visible=false;builderCamera.position.set(92,66,112);builderControls.target.set(0,1,-10);builderControls.update();$('builderCategory').innerHTML=buildCategoryOptions();$('builderCategory').value=builderCategory;renderBuilderCategoryChips();renderBuilderCatalog();updateBuilderCatalogDetail();updateBuilderQuickbar();renderBuilderStats();updateBuilderPowerUI(lastBuilderPowerStats);updateBuilderConnectionUI();refreshChannelButtons();$('builderWorldMode').textContent='BUILD MODE';updateBuilderTutorial();toast(builderTutorialDone?'ワークショップを開きました。11種類のパーツで乗り物を組み立てられます。':'操作トレーニングを開始します。部品選択→設置→編集→接続を順番に体験してください。');}
+function openBuilder(){if(builderTutorialDone&&$('builderConnectionType')?.value==='control')$('builderConnectionType').value='power';const panel=$('builderPanel');panel.classList.add('open');document.body.classList.add('builder-world-open');builderWorldOverlay.classList.add('open');builderWorldOpen=true;syncBuilderMachineModels();resizeBuilderWorld();builderControls.enabled=true;builderPlayer.visible=false;builderCamera.position.set(92,66,112);builderControls.target.set(0,1,-10);builderControls.update();$('builderCategory').innerHTML=buildCategoryOptions();$('builderCategory').value=builderCategory;renderBuilderCategoryChips();renderBuilderCatalog();updateBuilderCatalogDetail();updateBuilderQuickbar();renderBuilderStats();updateBuilderPowerUI(lastBuilderPowerStats);updateBuilderConnectionUI();refreshChannelButtons();$('builderWorldMode').textContent='BUILD MODE';updateBuilderTutorial();toast(builderTutorialDone?'ワークショップを開きました。11種類のパーツで乗り物を組み立てられます。':'操作トレーニングを開始します。部品選択→設置→編集→接続を順番に体験してください。');}
 function closeBuilder(){if(pilotState)stopPilotTest();const p=$('builderPanel');p.classList.remove('open');builderWorldOverlay.classList.remove('open');document.body.classList.remove('builder-world-open');builderWorldOpen=false;exitBuilderWalk();buildPlacementAsset=null;buildMoveMode=false;buildRotateMode=false;builderTransformPointer=null;builderControls.enabled=true;buildConnectMode='';buildConnectFirst=null;updateBuilderConnectionUI();if(builderPreview){builderScene.remove(builderPreview);builderPreview.traverse(o=>{o.geometry?.dispose();if(o.material){const ms=Array.isArray(o.material)?o.material:[o.material];ms.forEach(m=>m.dispose());}});builderPreview=null;}updateBuilderTutorial();}
 $('buildModeBtn').onclick=openBuilder;$('builderClose').onclick=()=>{$('builderPanel').classList.remove('open');};$('builderWorldExit').onclick=closeBuilder;$('builderWalkToggle').onclick=()=>{if(pilotState){stopPilotTest();}else if(builderWalkMode){exitBuilderWalk();$('builderPanel').classList.add('open');}else enterBuilderWalk();};$('builderWorldSave').onclick=()=>{if(builderTutorialActive()&&builderTutorialStep!==7){toast('保存操作はチュートリアル最後のステップです。黄色い指示を先に完了してください。');return;}saveGame(true);if(builderTutorialActive()&&builderTutorialStep===7){builderTutorialDone=true;builderTutorialStep=8;updateBuilderTutorial();updateBuilderCatalogDetail();updateBuilderSelection();saveGame(false);toast('訓練完了。自由建築が解放されました。');}};$('builderWorldGuide').onclick=()=>openEmbeddedBook();
 $('builderCategory').onchange=e=>{builderCategory=e.target.value;renderBuilderCategoryChips();renderBuilderCatalog();};$('builderSearch').oninput=e=>{builderSearch=e.target.value;renderBuilderCatalog();};document.querySelectorAll('.builder-library-tabs [data-inventory-filter]').forEach(btn=>btn.onclick=()=>{builderInventoryFilter=btn.dataset.inventoryFilter;renderBuilderInventoryTabs();renderBuilderCatalog();});$('builderBagToggle').onclick=()=>{if(builderWalkMode)exitBuilderWalk();$('builderPanel').classList.toggle('open');};
@@ -2192,7 +2218,7 @@ function updateBuilderWalk(dt){
 }
 
 function clearBuilderWorld(){buildLinks.forEach(l=>{if(l.line){builderScene.remove(l.line);l.line.geometry?.dispose();l.line.material?.dispose();}});buildAssets.forEach(a=>{if(a.model.userData.channelHelper){builderScene.remove(a.model.userData.channelHelper);a.model.userData.channelHelper.geometry?.dispose();a.model.userData.channelHelper.material?.dispose();}builderScene.remove(a.model);});buildLinks=[];buildAssets=[];nextBuildId=1;buildSelectedId=null;stopPilotTest();updateBuilderSelection();}
-function restoreBuilderWorld(data){clearBuilderWorld();for(const s of (Array.isArray(data?.builderAssets)?data.builderAssets:[])){const def=buildAssetDef(s.assetId);if(!def||!Number.isFinite(+s.x)||!Number.isFinite(+s.z))continue;const a=addBuildAsset(s.assetId,+s.x,+s.z,+s.rotation||0,+s.id,true,Number.isFinite(+s.scale)?+s.scale:1,Number.isFinite(+s.height)?+s.height:0);if(a){a.channel=Math.max(1,Math.min(99,Math.floor(+s.channel||1)));a.active=!!s.active;updateBuildChannelVisual(a);}}for(const l of (Array.isArray(data?.builderLinks)?data.builderLinks:[])){const a={type:l.aType,id:+l.aId},b={type:l.bType,id:+l.bId};if(!['machine','asset'].includes(a.type)||!['machine','asset'].includes(b.type)||!['power','control'].includes(l.type))continue;if(buildEndpointExists(a)&&buildEndpointExists(b))addBuildLink(a,b,l.type,true);}buildSelectedId=buildAssets.length?buildAssets[buildAssets.length-1].id:null;updateBuilderSelection();renderBuilderStats();}
+function restoreBuilderWorld(data){clearBuilderWorld();for(const s of (Array.isArray(data?.builderAssets)?data.builderAssets:[])){const assetId=s.assetId==='steering-stick'?'power-core':s.assetId;const def=buildAssetDef(assetId);if(!def||!Number.isFinite(+s.x)||!Number.isFinite(+s.z))continue;const a=addBuildAsset(assetId,+s.x,+s.z,+s.rotation||0,+s.id,true,Number.isFinite(+s.scale)?+s.scale:1,Number.isFinite(+s.height)?+s.height:0);if(a){a.channel=Math.max(1,Math.min(99,Math.floor(+s.channel||1)));a.active=!!s.active;updateBuildChannelVisual(a);}}for(const l of (Array.isArray(data?.builderLinks)?data.builderLinks:[])){const a={type:l.aType,id:+l.aId},b={type:l.bType,id:+l.bId};if(!['machine','asset'].includes(a.type)||!['machine','asset'].includes(b.type)||!['power','control'].includes(l.type))continue;if(buildEndpointExists(a)&&buildEndpointExists(b))addBuildLink(a,b,l.type,true);}buildSelectedId=buildAssets.length?buildAssets[buildAssets.length-1].id:null;updateBuilderSelection();renderBuilderStats();}
 
 const oldSave=loadGame();if(oldSave){restoreGame(oldSave);const offlineSeconds=applyOfflineProgress(oldSave);renderShop();updateMetrics();renderInspect();if(offlineSeconds>=5){const c=calc();toast(`自動復元完了 · オフライン ${(offlineSeconds/3600).toFixed(1)} 時間 · +${(funds-(+oldSave.funds||0)).toFixed(1)} Cr`);}saveGame(false);}else{workbenchLevel=0;funds=500;unlocked=0;unlockedMenus={power:false,mechanics:false,thermal:false,production:false,automation:false,advancedPower:false};activeShopCategory='core';researchDone={},attachmentLoot=[];placed=[];links=[];renderShop();updateMetrics();renderInspect();saveGame(false);}updateConnectionButton();setInterval(()=>{if(!paused)saveGame(false);},10000);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')saveGame(false);});window.addEventListener('pagehide',()=>saveGame(false));window.addEventListener('beforeunload',()=>saveGame(false));animate();
 
@@ -2321,6 +2347,83 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('prototypeModal')
 loadPrototypeLedger();renderPrototypeCenter();
 if(window.__NF_TEST__){window.__NF_TEST__.prototypePackages=PROTOTYPE_PACKAGES;window.__NF_TEST__.prototypeBuilds=prototypeBuilds;window.__NF_TEST__.startPrototypeBuild=startPrototypeBuild;}
 // ── End Prototype Design Center ──────────────────────────────────────────
+
+// Requested compact workshop UI only. Existing transform/edit controls are reused as-is.
+const workshopPanel=$('builderPanel');
+const workshopCatalog=workshopPanel?.querySelector('.builder-catalog');
+if(workshopPanel&&workshopCatalog){
+ const originalTutorialUpdate=updateBuilderTutorial;
+ updateBuilderTutorial=function(){
+  originalTutorialUpdate();
+  const training=builderTutorialActive();
+  document.body.classList.toggle('builder-training-active',training);
+  if(builderWorldOpen)workshopPanel.classList.toggle('open',training);
+ };
+ const originalSelectionUpdate=updateBuilderSelection;
+ updateBuilderSelection=function(){
+  originalSelectionUpdate();
+  const selected=buildAssets.some(a=>a.id===buildSelectedId);
+  document.body.classList.toggle('builder-has-selection',!!(builderWorldOpen&&builderTutorialDone&&selected));
+ };
+ const originalQuickbarUpdate=updateBuilderQuickbar;
+ function chooseHotbarAsset(id){
+  if(builderTutorialActive()){toast('チュートリアル完了後にクイック建築を使えます。');return;}
+  const def=buildAssetDef(id);if(!def)return;
+  if(pilotState)stopPilotTest();
+  if(builderWalkMode)exitBuilderWalk();
+  builderCatalogSelected=id;
+  if(['power-core','electric-floor'].includes(id)&&$('builderConnectionType'))$('builderConnectionType').value='power';
+  if($('builderCategory')){$('builderCategory').value=def.category;builderCategory=def.category;}
+  builderSearch='';if($('builderSearch'))$('builderSearch').value='';
+  builderInventoryFilter='all';
+  renderBuilderCategoryChips();renderBuilderCatalog();updateBuilderCatalogDetail();
+  rememberBuilderAsset(id);
+  setBuilderPlacementPreview(id);
+  document.body.classList.remove('builder-catalog-open');
+  toast(`${def.name}を選択。画面をタップして設置します。`);
+ }
+ updateBuilderQuickbar=function(){
+  originalQuickbarUpdate();
+  const host=$('builderQuickbar');if(!host)return;
+  host.querySelectorAll('[data-quick-asset]').forEach(btn=>{btn.onclick=()=>chooseHotbarAsset(btn.dataset.quickAsset);});
+ };
+ const originalPlacementPreview=setBuilderPlacementPreview;
+ setBuilderPlacementPreview=function(id){originalPlacementPreview(id);document.body.classList.remove('builder-catalog-open');};
+ const originalOpenBuilder=openBuilder;
+ openBuilder=function(){
+  originalOpenBuilder();
+  if($('builderBagToggle'))$('builderBagToggle').textContent='📦 アイテム';
+  document.body.classList.toggle('builder-training-active',builderTutorialActive());
+  workshopPanel.classList.toggle('open',builderTutorialActive());
+  updateBuilderSelection();
+  updateBuilderQuickbar();
+ };
+ const originalCloseBuilder=closeBuilder;
+ closeBuilder=function(){
+  document.body.classList.remove('builder-catalog-open','builder-has-selection','builder-training-active');
+  originalCloseBuilder();
+ };
+ $('buildModeBtn').onclick=openBuilder;
+ $('builderWorldExit').onclick=closeBuilder;
+ $('builderBagToggle').textContent='📦 アイテム';
+ $('builderBagToggle').onclick=()=>{
+  if(builderWalkMode)exitBuilderWalk();
+  if(builderTutorialActive()){
+   workshopPanel.classList.toggle('open');
+   return;
+  }
+  const opening=!document.body.classList.contains('builder-catalog-open');
+  document.body.classList.toggle('builder-catalog-open',opening);
+  if(opening){renderBuilderCategoryChips();renderBuilderCatalog();updateBuilderCatalogDetail();}
+ };
+ document.addEventListener('pointerdown',e=>{
+  if(!document.body.classList.contains('builder-catalog-open'))return;
+  if(workshopCatalog.contains(e.target)||e.target===$('builderBagToggle'))return;
+  document.body.classList.remove('builder-catalog-open');
+ },true);
+ // Ensure the initial six slots use the same original quickbar renderer and placement logic.
+ updateBuilderQuickbar();
+}
 
 })();
 </script><style id="finalSaveAndContrastPass">
@@ -2750,6 +2853,88 @@ body.builder-world-open #builderPanel .builder-notes{max-height:180px!important;
   body.builder-world-open #builderPanel .builder-status-grid{top:128px!important}
   body.builder-world-open #builderPanel .builder-tutorial{top:195px!important;max-height:115px!important}
   body.builder-world-open #builderPanel .builder-main{top:205px!important}
+}
+</style>
+
+
+<style id="requestedCompactWorkshopOnly">
+/* Default build view: keep the original world chrome; compact only the workshop UI. */
+body.builder-world-open:not(.builder-training-active) #builderPanel{
+ position:fixed!important;inset:0!important;top:0!important;right:0!important;bottom:0!important;left:0!important;
+ width:100vw!important;height:100vh!important;height:100dvh!important;display:block!important;
+ pointer-events:none!important;z-index:90!important;background:transparent!important
+}
+body.builder-world-open:not(.builder-training-active) #builderPanel .builder-shell{
+ display:block!important;position:static!important;width:auto!important;height:auto!important;min-height:0!important;
+ background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;
+ overflow:visible!important;backdrop-filter:none!important;pointer-events:none!important
+}
+body.builder-world-open:not(.builder-training-active) #builderPanel .builder-head,
+body.builder-world-open:not(.builder-training-active) #builderPanel .builder-status-grid{display:none!important}
+body.builder-world-open:not(.builder-training-active) #builderPanel .builder-main{
+ display:block!important;position:static!important;width:auto!important;height:auto!important;min-height:0!important;
+ padding:0!important;margin:0!important;overflow:visible!important;pointer-events:none!important
+}
+body.builder-world-open:not(.builder-training-active) #builderPanel .builder-catalog,
+body.builder-world-open:not(.builder-training-active) #builderPanel .builder-tools{
+ display:none!important;min-height:0!important;max-height:none!important
+}
+/* Use the original catalog and its original search/category/favorite/detail actions in a small drawer. */
+body.builder-world-open:not(.builder-training-active).builder-catalog-open #builderPanel .builder-catalog{
+ display:flex!important;position:fixed!important;left:10px!important;top:84px!important;
+ width:min(410px,calc(100vw - 20px))!important;max-height:calc(100dvh - 168px)!important;
+ min-height:0!important;padding:10px!important;gap:8px!important;overflow:hidden!important;
+ background:rgba(7,19,30,.97)!important;border:1px solid #738b99!important;border-radius:13px!important;
+ box-shadow:0 14px 38px #000b!important;pointer-events:auto!important;z-index:140!important
+}
+body.builder-world-open:not(.builder-training-active).builder-catalog-open #builderPanel .builder-asset-list{
+ min-height:100px!important;max-height:none!important;flex:1 1 auto!important;overflow:auto!important
+}
+body.builder-world-open:not(.builder-training-active).builder-catalog-open #builderPanel .builder-catalog-detail{
+ flex:0 0 auto!important;max-height:170px!important;overflow:auto!important
+}
+/* The exact original toolbar and selected-part editor are shown only while a part is selected. */
+body.builder-world-open:not(.builder-training-active).builder-has-selection #builderPanel .builder-tools{
+ display:flex!important;position:fixed!important;left:10px!important;top:84px!important;
+ width:min(355px,calc(100vw - 20px))!important;max-height:calc(100dvh - 168px)!important;
+ min-height:0!important;padding:10px!important;gap:8px!important;overflow-y:auto!important;overscroll-behavior:contain!important;
+ background:rgba(7,19,30,.97)!important;border:1px solid #738b99!important;border-radius:13px!important;
+ box-shadow:0 14px 38px #000b!important;pointer-events:auto!important;z-index:135!important
+}
+body.builder-world-open:not(.builder-training-active).builder-catalog-open.builder-has-selection #builderPanel .builder-tools{display:none!important}
+/* One compact inventory button; all other original top controls stay in their original positions. */
+body.builder-world-open #builderBagToggle{min-width:88px!important;min-height:40px!important;padding:8px 11px!important;font-size:10px!important}
+/* Minecraft-style hotbar: the only persistent bottom-center build UI. */
+body.builder-world-open #builderQuickbar{
+ position:fixed!important;z-index:150!important;left:50%!important;bottom:calc(env(safe-area-inset-bottom,0px) + 8px)!important;
+ transform:translateX(-50%)!important;display:flex!important;flex-wrap:nowrap!important;gap:4px!important;
+ max-width:calc(100vw - 14px)!important;padding:6px!important;overflow-x:auto!important;overflow-y:hidden!important;
+ background:rgba(13,18,24,.94)!important;border:2px solid #82909b!important;border-radius:9px!important;
+ box-shadow:0 6px 18px #000a,inset 0 1px #ffffff20!important;backdrop-filter:blur(6px)!important;scrollbar-width:none!important
+}
+body.builder-world-open #builderQuickbar::-webkit-scrollbar{display:none!important}
+body.builder-world-open #builderQuickbar .builder-quick-slot{
+ flex:0 0 52px!important;width:52px!important;height:54px!important;min-height:54px!important;
+ padding:4px!important;gap:2px!important;border:2px solid #626e77!important;border-radius:5px!important;
+ background:linear-gradient(145deg,#39444c,#202a31)!important;color:#f0f3f5!important;font-size:9px!important
+}
+body.builder-world-open #builderQuickbar .builder-quick-slot.active{
+ border:2px solid #f2ce68!important;background:linear-gradient(145deg,#5a5032,#37301d)!important;
+ box-shadow:0 0 0 2px #f2ce6840,inset 0 0 8px #ffe9a322!important
+}
+body.builder-world-open #builderQuickbar .builder-quick-icon{width:23px!important;height:23px!important;border:1px solid #b1bdc5!important;border-radius:3px!important;box-shadow:inset 0 0 5px #fff2!important}
+body.builder-world-open #builderQuickbar .builder-quick-slot small{color:#d5dde2!important;font-size:8px!important}
+body.builder-world-open #builderQuickbarHint{display:none!important}
+@media(max-width:620px){
+ body.builder-world-open:not(.builder-training-active).builder-catalog-open #builderPanel .builder-catalog,
+ body.builder-world-open:not(.builder-training-active).builder-has-selection #builderPanel .builder-tools{
+  left:7px!important;top:74px!important;width:min(355px,calc(100vw - 14px))!important;
+  max-height:calc(100dvh - 145px)!important
+ }
+ body.builder-world-open #builderBagToggle{min-width:78px!important;padding:7px 8px!important;font-size:9px!important}
+ body.builder-world-open #builderQuickbar{gap:3px!important;padding:5px!important}
+ body.builder-world-open #builderQuickbar .builder-quick-slot{flex-basis:45px!important;width:45px!important;height:49px!important;min-height:49px!important}
+ body.builder-world-open #builderQuickbar .builder-quick-icon{width:20px!important;height:20px!important}
 }
 </style>
 
